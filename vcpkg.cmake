@@ -1,2 +1,2 @@
 add_custom_target(vcpkg
-        COMMAND ls)
+        COMMAND bash ${CMAKE_CURRENT_LIST_DIR}/scripts/install_vcpkg.sh)
