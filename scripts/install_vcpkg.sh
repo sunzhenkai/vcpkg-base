@@ -4,6 +4,7 @@ set -ex
 BASE=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 INSTALL_DIR=$HOME/.local
 
+[ -e "$INSTALL_DIR/vcpkg/vcpkg" ] && exit 0
 [ ! -e "$INSTALL_DIR" ] && mkdir -p "$INSTALL_DIR" && cd "$INSTALL_DIR"
 bash "$BASE/install_dependencies.sh"
 git clone https://github.com/Microsoft/vcpkg.git
