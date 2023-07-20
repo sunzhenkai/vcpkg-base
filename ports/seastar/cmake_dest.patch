@@ -1,8 +1,8 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 5f34fe88..8292178a 100644
+index aa0056a4..7ca94220 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -1107,7 +1107,7 @@ if (Seastar_INSTALL)
+@@ -1201,7 +1201,7 @@ if (Seastar_INSTALL)
      INPUT ${CMAKE_CURRENT_BINARY_DIR}/pkgconfig/seastar-testing-install.pc.in)
 
    include (CMakePackageConfigHelpers)
