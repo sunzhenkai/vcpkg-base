@@ -1,7 +1,10 @@
 add_custom_target(vcpkg
         COMMAND bash ${CMAKE_CURRENT_LIST_DIR}/scripts/install_vcpkg.sh)
+#set(VCPKG_TARGET_TRIPLET x64-linux)
 set(VCPKG_BINARY "$ENV{HOME}/.local/vcpkg/vcpkg")
-#set(VCPKG_TOOLCHAIN_FILE "$ENV{HOME}/.local/vcpkg/scripts/buildsystems/vcpkg.cmake")
+set(VCPKG_TOOLCHAIN_FILE "$ENV{HOME}/.local/vcpkg/scripts/buildsystems/vcpkg.cmake")
+message(STATUS "vcpkg toolchain file is ${VCPKG_TOOLCHAIN_FILE}")
+#set(CMAKE_TOOLCHAIN_FILE ${VCPKG_TOOLCHAIN_FILE})
 #add_definitions(CMAKE_TOOLCHAIN_FILE ${VCPKG_TOOLCHAIN_FILE})
 
 macro(AddLibrary library)
