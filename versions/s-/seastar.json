@@ -1,5 +1,9 @@
 {
-    "version": "22.11.0",
-    "git-tree": "10b7d604d1f5037a733879d8d171d4405faebbe9",
-    "port-version": 0
+    "versions": [
+        {
+            "version": "22.11.0",
+            "git-tree": "10b7d604d1f5037a733879d8d171d4405faebbe9",
+            "port-version": 0
+        }
+    ]
 }
