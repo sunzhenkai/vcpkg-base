@@ -10,6 +10,22 @@ else
 fi
 
 debian_packages=(
+    autoconf
+    curl
+    zip
+    unzip
+    tar
+    cmake
+    ninja-build
+    make
+    git
+    libtool
+    libpciaccess-dev
+    xfslibs-dev
+    libgnutls28-dev
+    libsctp-dev
+    systemtap-sdt-dev
+    valgrind
 )
 
 fedora_packages=(

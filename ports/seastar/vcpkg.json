@@ -8,6 +8,7 @@
     "supports": "linux & x64",
     "dependencies": [
         "boost-asio",
+        "boost-endian",
         "boost-filesystem",
         "boost-lockfree",
         "boost-program-options",
