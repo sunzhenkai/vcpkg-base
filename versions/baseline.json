@@ -1,0 +1,8 @@
+{
+    "default": {
+        "seastar": {
+            "baseline": "22.11.0",
+            "port-version": 0
+        }
+    }
+}
