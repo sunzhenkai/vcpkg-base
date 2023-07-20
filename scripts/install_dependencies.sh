@@ -26,6 +26,8 @@ debian_packages=(
     libsctp-dev
     systemtap-sdt-dev
     valgrind
+    bison
+    flex
 )
 
 fedora_packages=(
