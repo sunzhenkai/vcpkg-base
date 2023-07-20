@@ -3,6 +3,7 @@ vcpkg_from_github(OUT_SOURCE_PATH SOURCE_PATH
         REF seastar-22.11.0
         SHA512 134a6558ead7bf122eb2c02e1059110784764d6c4a281f4e214ea20857ae4a74e4bcd2375671687cfc350d81823b66ceb20e169c0f5aaa7a8960a1bde38085f6
         HEAD_REF master
+        PATCHES cmake_dest.patch
         )
 
 if (VCPKG_TARGET_IS_LINUX)
