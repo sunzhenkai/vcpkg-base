@@ -28,6 +28,7 @@ debian_packages=(
     valgrind
     bison
     flex
+    pkg-config
 )
 
 fedora_packages=(
