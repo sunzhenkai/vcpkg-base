@@ -15,8 +15,8 @@ function usage() {
 [ ! -e "$INSTALL_DIR" ] && mkdir -p "$INSTALL_DIR"
 sudo bash "$BASE/install_dependencies.sh"
 cd "$INSTALL_DIR"
-git clone https://gitee.com/mirrors/vcpkg.git
-#git clone https://github.com/Microsoft/vcpkg.git
+#git clone https://gitee.com/mirrors/vcpkg.git
+git clone https://github.com/Microsoft/vcpkg.git
 bash "vcpkg/bootstrap-vcpkg.sh"
 
 if [ -e "vcpkg/vcpkg" ]; then
