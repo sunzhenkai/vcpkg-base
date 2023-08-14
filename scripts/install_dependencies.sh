@@ -67,7 +67,8 @@ ubuntu | debian | pop)
 fedora)
     dnf install -y "${fedora_packages[@]}"
     ;;
-rhel | centos | rocky)
+  # alinux: ali-yun linux os
+rhel | centos | rocky | alinux)
     if [ "$VERSION_ID" = "7" ]; then
         yum install -y epel-release centos-release-scl scl-utils
         yum install -y "${centos7_packages[@]}"
