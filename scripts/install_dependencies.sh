@@ -1,4 +1,5 @@
 #!/bin/bash
+#set -x
 # check os information
 if [ -f "/etc/os-release" ]; then
     . /etc/os-release
@@ -36,6 +37,9 @@ fedora_packages=(
 
 # centos7 & centos8 common packages
 redhat_packages=(
+  perl-IPC-Cmd
+  flex
+  bison
 )
 
 centos7_packages=(
@@ -67,7 +71,12 @@ ubuntu | debian | pop)
 fedora)
     dnf install -y "${fedora_packages[@]}"
     ;;
-  # alinux: ali-yun linux os
+# alinux: ali-yun linux os
+alinux)
+    if [ "$VERSION_ID" = "3" ]; then
+        yum install -y "${redhat_packages[@]}"
+    fi
+    ;;
 rhel | centos | rocky | alinux)
     if [ "$VERSION_ID" = "7" ]; then
         yum install -y epel-release centos-release-scl scl-utils
