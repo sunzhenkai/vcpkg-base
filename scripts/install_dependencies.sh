@@ -77,6 +77,10 @@ alinux)
         yum install -y "${redhat_packages[@]}"
     fi
     ;;
+# amzn: amazon linux os
+amzn)
+    yum install -y "${redhat_packages[@]}"
+    ;;
 rhel | centos | rocky | alinux)
     if [ "$VERSION_ID" = "7" ]; then
         yum install -y epel-release centos-release-scl scl-utils
