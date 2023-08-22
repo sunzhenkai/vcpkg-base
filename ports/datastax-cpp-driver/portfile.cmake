@@ -4,7 +4,8 @@ vcpkg_from_github(
         REF 2.17.0
         SHA512 9589a6399f536ab03c27755e646c1195dd911c47c465815c21c15226e809cc4f8691f7c5a74ca0866b9aef377da16532be415015f544a939ea46ecd5644dff18
         HEAD_REF master
-        )
+        PATCHES cmake_deps.patch
+)
 
 message(STATUS "source path of seastar is ${SOURCE_PATH}")
 if (VCPKG_TARGET_IS_LINUX)
