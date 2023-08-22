@@ -7,8 +7,8 @@
     "registries": [
         {
             "kind": "git",
-            "repository": "https://gitee.com/szhenkai/vcpkg-base.git",
-            "baseline": "7edcaef88addf2395a7324c5c9cb56fa932721f7",
+            "repository": "https://github.com/sunzhenkai/vcpkg-base.git",
+            "baseline": "e137417b64ba93ba824c957a43ca0c00327b83ab",
             "packages": [
                 "seastar",
                 "datastax-cpp-driver"
