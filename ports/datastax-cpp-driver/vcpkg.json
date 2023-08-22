@@ -6,6 +6,8 @@
     "documentation": "https://github.com/datastax/cpp-driver",
     "license": "Apache-2.0",
     "supports": "linux & x64",
-    "dependencies": [],
+    "dependencies": [
+        "libuv"
+    ],
     "features": {}
 }
