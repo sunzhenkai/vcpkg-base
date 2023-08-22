@@ -1,0 +1,18 @@
+{
+    "name": "feature-generator-server",
+    "version": "0.0.1",
+    "dependencies": [
+        "seastar",
+        "datastax-cpp-driver"
+    ],
+    "overrides": [
+        {
+            "name": "seastar",
+            "version": "22.11.0"
+        },
+        {
+            "name": "datastax-cpp-driver",
+            "version": "2.17.0"
+        }
+    ]
+}
