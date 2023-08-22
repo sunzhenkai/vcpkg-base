@@ -8,7 +8,7 @@
         {
             "kind": "git",
             "repository": "https://github.com/sunzhenkai/vcpkg-base.git",
-            "baseline": "d0c84327add1349a077254d40cfbebfd06715195",
+            "baseline": "d050ee30b5c3b81670fad6f868cf9c4083523ced",
             "reference": "fix-cass-client",
             "packages": [
                 "seastar",
