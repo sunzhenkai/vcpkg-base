@@ -8,7 +8,7 @@ vcpkg_from_github(
 
 message(STATUS "source path of seastar is ${SOURCE_PATH}")
 if (VCPKG_TARGET_IS_LINUX)
-    message(STATUS "Seastar currently requires the following libraries from the system package manager:\n    libpciaccess\n    xfslibs\n    libgnutls28\n    libsctp\n    systemtap-sdt\n    libtool\n    valgrind \n\nThese can be installed on Ubuntu systems via apt-get install libpciaccess-dev xfslibs-dev libgnutls28-dev libsctp-dev systemtap-sdt-dev libtool valgrind")
+    message(STATUS "build lib on linux")
 endif ()
 
 vcpkg_configure_cmake(
