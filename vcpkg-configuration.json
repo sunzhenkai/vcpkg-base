@@ -8,9 +8,10 @@
         {
             "kind": "git",
             "repository": "https://gitee.com/szhenkai/vcpkg-base.git",
-            "baseline": "698975dcd3eb1155fde10fc97591ff9be17503df",
+            "baseline": "7edcaef88addf2395a7324c5c9cb56fa932721f7",
             "packages": [
-                "seastar"
+                "seastar",
+                "datastax-cpp-driver"
             ]
         }
     ]
