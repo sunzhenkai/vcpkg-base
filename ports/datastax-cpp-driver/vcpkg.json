@@ -1,0 +1,11 @@
+{
+    "name": "datastax-cpp-driver",
+    "version-string": "2.17.0",
+    "description": "DataStax C/C++ Driver for Apache Cassandra® and DataStax Products",
+    "homepage": "https://github.com/datastax/cpp-driver",
+    "documentation": "https://github.com/datastax/cpp-driver",
+    "license": "Apache-2.0",
+    "supports": "linux & x64",
+    "dependencies": [],
+    "features": {}
+}
