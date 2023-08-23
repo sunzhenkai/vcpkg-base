@@ -7,6 +7,10 @@
         "datastax-cpp-driver": {
             "baseline": "2.17.0",
             "port-version": 0
+        },
+        "cpp-common": {
+            "baseline": "0.0.1",
+            "port-version": 0
         }
     }
 }
