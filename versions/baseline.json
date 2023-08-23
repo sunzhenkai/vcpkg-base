@@ -9,7 +9,7 @@
             "port-version": 0
         },
         "cpp-common": {
-            "baseline": "0.0.1",
+            "baseline": "0.0.7",
             "port-version": 0
         }
     }
