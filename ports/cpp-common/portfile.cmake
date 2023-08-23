@@ -1,8 +1,8 @@
 vcpkg_from_github(
         OUT_SOURCE_PATH SOURCE_PATH
         REPO sunzhenkai/cpp-common
-        REF 0.0.3
-        SHA512 fa5075bdca9c2f431e2b44600abb933af33aca9d7ce75164bb05b488eaa0164db4a5034634eff0c6f56b8d28350612de70db899454c9e0a74a206cf8e2e3f560
+        REF 0.0.4
+        SHA512 9910f70987d82ac1c6af15f575678d687f3e7eb33f040eec2cb2df66b413d395deedd2bdab8f3fd2c6b3910118c52b577338ccbf90aed2c2834133e054ff63ce
         HEAD_REF main
 )
 
