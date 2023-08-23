@@ -15,3 +15,4 @@ vcpkg_cmake_configure(
 vcpkg_install_cmake()
 vcpkg_copy_pdbs()
 vcpkg_cmake_config_fixup()
+vcpkg_fixup_pkgconfig()
