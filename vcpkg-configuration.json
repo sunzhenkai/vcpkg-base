@@ -8,7 +8,7 @@
         {
             "kind": "git",
             "repository": "https://github.com/sunzhenkai/vcpkg-base.git",
-            "baseline": "9d056e3f2c590b81027d8f84d45407e7c45d5c09",
+            "baseline": "c7a105bbe31d79153cf7b7932fb677568ddd0db6",
             "reference": "main",
             "packages": [
                 "seastar",
