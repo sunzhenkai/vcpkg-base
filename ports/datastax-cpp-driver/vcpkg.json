@@ -7,6 +7,8 @@
     "license": "Apache-2.0",
     "supports": "linux & x64",
     "dependencies": [
+        "vcpkg-cmake",
+        "vcpkg-cmake-config",
         "libuv",
         "curl",
         "openssl",
