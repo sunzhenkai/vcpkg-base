@@ -8,11 +8,12 @@
         {
             "kind": "git",
             "repository": "https://github.com/sunzhenkai/vcpkg-base.git",
-            "baseline": "2ca05bbcd8f32817212d50788ac20f573249435b",
-            "reference": "fix-cass-client",
+            "baseline": "23c2668b76d6f54bc0dcff4dcbf6682874fc0b47",
+            "reference": "fix-cass-config",
             "packages": [
                 "seastar",
-                "datastax-cpp-driver"
+                "datastax-cpp-driver",
+                "cpp-common"
             ]
         }
     ]

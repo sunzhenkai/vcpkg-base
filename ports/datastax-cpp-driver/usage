@@ -1,4 +1,4 @@
-The package fmt provides CMake targets:
+The package datastax-cpp-driver provides CMake targets:
 
     find_package(- REQUIRED)
     target_link_libraries(main PRIVATE -)

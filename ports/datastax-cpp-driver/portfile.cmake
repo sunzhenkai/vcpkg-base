@@ -7,18 +7,18 @@ vcpkg_from_github(
         PATCHES cmake_deps.patch
 )
 
-message(STATUS "source path is ${SOURCE_PATH}")
+message(STATUS "source path is ${SOURCE_PATH}, current packages dir is ${CURRENT_PACKAGES_DIR}")
 
-vcpkg_configure_cmake(
+vcpkg_cmake_configure(
         SOURCE_PATH ${SOURCE_PATH}
-        PREFER_NINJA
-        OPTIONS 
+        OPTIONS
         -DCASS_BUILD_SHARED=OFF 
         -DCASS_BUILD_STATIC=ON
 )
 
 vcpkg_install_cmake()
 vcpkg_copy_pdbs()
+vcpkg_fixup_pkgconfig()
 
 if (VCPKG_LIBRARY_LINKAGE STREQUAL "static")
     file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/bin" "${CURRENT_PACKAGES_DIR}/debug/bin")
