@@ -7,5 +7,17 @@ INCLUDE(${CMAKE_CURRENT_LIST_DIR}/cmakes/protobuf.cmake)
 INCLUDE(${CMAKE_CURRENT_LIST_DIR}/cmakes/flatbuffers.cmake)
 
 IF (BUILD_EXE)
+    # datastax-cpp-driver
+    FIND_PACKAGE(PkgConfig REQUIRED)
+    pkg_check_modules(cassandra_static REQUIRED IMPORTED_TARGET cassandra_static)
+    # cppcommon
+    pkg_check_modules(cppcommon REQUIRED IMPORTED_TARGET cppcommon)
+    FIND_PACKAGE(cppcommon CONFIG REQUIRED)
+
+    # target
     ADD_EXECUTABLE(main src/main.cpp)
+    TARGET_LINK_LIBRARIES(main
+            cppcommon::cppcommon
+            PkgConfig::cassandra_static
+            )
 ENDIF ()
