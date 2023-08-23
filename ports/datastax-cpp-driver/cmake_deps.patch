@@ -130,3 +130,16 @@ index 90524723..3c6b9958 100644
  endif()
  
  #------------------------
+diff --git a/packaging/cassandra_static.pc.in b/packaging/cassandra_static.pc.in
+index 394c8e0f..c0d1805a 100644
+--- a/packaging/cassandra_static.pc.in
++++ b/packaging/cassandra_static.pc.in
+@@ -6,7 +6,7 @@ includedir=@includedir@
+ Name: cassandra
+ Description: A C/C++ client driver for Apache Cassandra and DataStax Products
+ Version: @version@
+-Requires: libuv
++Requires: libuv-static
+ Requires: openssl
+ Libs: -L${libdir} -lcassandra_static -lstdc++
+ Cflags: -I${includedir}
