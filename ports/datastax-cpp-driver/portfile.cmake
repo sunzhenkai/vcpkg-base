@@ -7,7 +7,7 @@ vcpkg_from_github(
         PATCHES cmake_deps.patch
 )
 
-message(STATUS "source path is ${SOURCE_PATH}")
+message(STATUS "source path is ${SOURCE_PATH}, current packages dir is ${CURRENT_PACKAGES_DIR}")
 
 vcpkg_configure_cmake(
         SOURCE_PATH ${SOURCE_PATH}
@@ -19,6 +19,7 @@ vcpkg_configure_cmake(
 
 vcpkg_install_cmake()
 vcpkg_copy_pdbs()
+vcpkg_cmake_config_fixup(PACKAGE_NAME cassandra_static)
 
 if (VCPKG_LIBRARY_LINKAGE STREQUAL "static")
     file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/bin" "${CURRENT_PACKAGES_DIR}/debug/bin")
