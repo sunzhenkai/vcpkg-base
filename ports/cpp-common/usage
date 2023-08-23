@@ -1,4 +1,0 @@
-The package cpp-common provides CMake targets:
-
-    find_package(- REQUIRED)
-    target_link_libraries(main PRIVATE -)
