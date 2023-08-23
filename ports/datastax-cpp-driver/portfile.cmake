@@ -7,10 +7,7 @@ vcpkg_from_github(
         PATCHES cmake_deps.patch
 )
 
-message(STATUS "source path of seastar is ${SOURCE_PATH}")
-if (VCPKG_TARGET_IS_LINUX)
-    message(STATUS "build lib on linux")
-endif ()
+message(STATUS "source path is ${SOURCE_PATH}")
 
 vcpkg_configure_cmake(
         SOURCE_PATH ${SOURCE_PATH}
