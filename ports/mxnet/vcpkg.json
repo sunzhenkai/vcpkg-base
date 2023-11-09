@@ -12,6 +12,7 @@
         "curl",
         "protobuf",
         "gtest",
+        "libxext",
         "opencv"
     ],
     "features": {}
