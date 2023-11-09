@@ -11,7 +11,8 @@
         "vcpkg-cmake-config",
         "curl",
         "protobuf",
-        "gtest"
+        "gtest",
+        "opencv"
     ],
     "features": {}
 }

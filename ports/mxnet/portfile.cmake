@@ -12,6 +12,7 @@ vcpkg_cmake_configure(
         SOURCE_PATH ${SOURCE_PATH}
         OPTIONS
         -DUSE_CUDA=OFF
+        -DUSE_INTGEMM=OFF
 )
 
 vcpkg_install_cmake()
