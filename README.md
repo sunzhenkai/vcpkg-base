@@ -11,3 +11,8 @@ git diff > patch # tips: DO NOT COPY CONTENT, COPY FILE DIRECTLY
 wget https://codeload.github.com/{user}/{project}/tar.gz/refs/tags/{version}
 vcpkg hash {version}
 ```
+
+## Add a port
+- add `ports/{new-port}`
+- add `versions/*-/{new-port}.json`
+- mod `versions/baseline.json`
