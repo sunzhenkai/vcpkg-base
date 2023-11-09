@@ -1,0 +1,17 @@
+{
+    "name": "mxnet",
+    "version-string": "1.9.1",
+    "description": "cpp common",
+    "homepage": "https://github.com/apache/mxnet.git",
+    "documentation": "https://github.com/apache/mxnet.git",
+    "license": "Apache-2.0",
+    "supports": "linux & x64",
+    "dependencies": [
+        "vcpkg-cmake",
+        "vcpkg-cmake-config",
+        "curl",
+        "protobuf",
+        "gtest"
+    ],
+    "features": {}
+}
