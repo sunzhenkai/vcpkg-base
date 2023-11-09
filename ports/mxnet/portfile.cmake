@@ -10,6 +10,8 @@ message(STATUS "source path is ${SOURCE_PATH}, current packages dir is ${CURRENT
 
 vcpkg_cmake_configure(
         SOURCE_PATH ${SOURCE_PATH}
+        OPTIONS
+        -DUSE_CUDA=OFF
 )
 
 vcpkg_install_cmake()
