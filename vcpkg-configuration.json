@@ -8,8 +8,8 @@
         {
             "kind": "git",
             "repository": "https://github.com/sunzhenkai/vcpkg-base.git",
-            "baseline": "0125ec04afd71fcb188e6fa5a728bf7f0e60ad5c",
-            "reference": "main",
+            "baseline": "54a4c501145c1472bc0f40b9b489ee33c3db67ff",
+            "reference": "wip-mxnet",
             "packages": [
                 "seastar",
                 "datastax-cpp-driver",
