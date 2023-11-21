@@ -8,7 +8,7 @@
         {
             "kind": "git",
             "repository": "https://github.com/sunzhenkai/vcpkg-base.git",
-            "baseline": "7837a3faed14344507061d3b93547a3387f3447b",
+            "baseline": "7a16264b51f793a8ad5910dcbf25f954e600af6e",
             "reference": "wip-mxnet",
             "packages": [
                 "seastar",
