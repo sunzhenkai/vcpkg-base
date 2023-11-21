@@ -1,0 +1,20 @@
+{
+    "default-registry": {
+        "kind": "git",
+        "repository": "https://github.com/microsoft/vcpkg.git",
+        "baseline": "21bbb14c4113b89cd06402e852e075341722304f"
+    },
+    "registries": [
+        {
+            "kind": "git",
+            "repository": "https://github.com/sunzhenkai/vcpkg-base.git",
+            "baseline": "4eceb48415c60dcd71c31f91a24e8e2ceb619565",
+            "reference": "main",
+            "packages": [
+                "seastar",
+                "datastax-cpp-driver",
+                "cpp-common"
+            ]
+        }
+    ]
+}

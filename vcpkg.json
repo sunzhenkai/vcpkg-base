@@ -1,0 +1,19 @@
+{
+    "name": "vcpkg-base",
+    "version": "0.0.1",
+    "dependencies": [
+        "seastar",
+        "datastax-cpp-driver",
+        "cpp-common"
+    ],
+    "overrides": [
+        {
+            "name": "seastar",
+            "version": "22.11.0"
+        },
+        {
+            "name": "datastax-cpp-driver",
+            "version": "2.17.0"
+        }
+    ]
+}

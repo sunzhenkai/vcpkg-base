@@ -8,6 +8,7 @@ function usage() {
     echo "FOR YOUR INFORMATION: "
     echo "INSTALL_DIR: ${INSTALL_DIR}"
     echo "CMAKE_TOOLCHAIN_FILE: ${INSTALL_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake"
+    echo "USAGE: -DCMAKE_TOOLCHAIN_FILE=${INSTALL_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake"
 }
 
 [ -e "$INSTALL_DIR/vcpkg/vcpkg" ] && usage && exit 0

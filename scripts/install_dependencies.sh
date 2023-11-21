@@ -5,6 +5,8 @@ if [ -f "/etc/os-release" ]; then
     . /etc/os-release
 elif [ -f "/etc/arch-release" ]; then
     export ID=arch
+elif [[ "$OSTYPE" =~ ^darwin ]]; then
+    export ID="darwin"
 else
     echo "/etc/os-release missing."
     exit 1
@@ -37,9 +39,9 @@ fedora_packages=(
 
 # centos7 & centos8 common packages
 redhat_packages=(
-  perl-IPC-Cmd
-  flex
-  bison
+    perl-IPC-Cmd
+    flex
+    bison
 )
 
 centos7_packages=(
@@ -62,6 +64,9 @@ arch_packages=(
 )
 
 opensuse_packages=(
+)
+
+brew_packages=(
 )
 
 case "$ID" in
@@ -98,6 +103,11 @@ arch | manjaro)
         pacman -Sy --needed --noconfirm "${arch_packages[@]}"
     else
         echo "running without root. Skipping main dependencies (pacman)." 1>&2
+    fi
+    ;;
+darwin)
+    if ! which brew; then
+        brew install "${brew_packages[@]}"
     fi
     ;;
 *)
