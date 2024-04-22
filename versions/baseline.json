@@ -1,12 +1,16 @@
 {
-    "default": {
-        "seastar": {
-            "baseline": "22.11.0",
-            "port-version": 0
-        },
-        "datastax-cpp-driver": {
-            "baseline": "2.17.0",
-            "port-version": 0
-        }
+  "default": {
+    "cpp-common": {
+      "baseline": "0.0.9",
+      "port-version": 0
+    },
+    "datastax-cpp-driver": {
+      "baseline": "2.17.0",
+      "port-version": 0
+    },
+    "seastar": {
+      "baseline": "22.11.0",
+      "port-version": 0
     }
+  }
 }
