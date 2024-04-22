@@ -3,8 +3,7 @@
     "version": "0.0.1",
     "dependencies": [
         "seastar",
-        "datastax-cpp-driver",
-        "cpp-common"
+        "datastax-cpp-driver"
     ],
     "overrides": [
         {
