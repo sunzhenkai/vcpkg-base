@@ -1,4 +1,4 @@
 cpp-common provides CMake targets:
 
-find_package(cpp_common_lib CONFIG REQUIRED)
+find_package(cpp-common CONFIG REQUIRED)
 target_link_libraries(main PRIVATE cpp-common::cpp-common)
