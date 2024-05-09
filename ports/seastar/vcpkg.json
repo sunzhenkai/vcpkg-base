@@ -1,6 +1,6 @@
 {
   "name": "seastar",
-  "version-string": "22.11.0",
+  "version": "22.11.0",
   "description": "High performance server-side application framework",
   "homepage": "https://github.com/scylladb/seastar",
   "documentation": "http://docs.seastar.io/master/index.html",
