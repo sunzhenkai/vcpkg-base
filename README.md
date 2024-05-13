@@ -17,3 +17,8 @@ vcpkg hash {version}
 ```
 -DCMAKE_TOOLCHAIN_FILE=/{HOME}/.local/vcpkg/scripts/buildsystems/vcpkg.cmake
 ```
+
+# Insall Vcpkg
+```shell
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/sunzhenkai/vcpkg-base/main/scripts/install_vcpkg_pure.sh)"
+```
