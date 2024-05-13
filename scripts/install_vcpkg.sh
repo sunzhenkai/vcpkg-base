@@ -3,6 +3,7 @@ set -e
 # variables
 BASE=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 INSTALL_DIR=$HOME/.local
+TS=$(date +%s)
 
 function usage() {
     echo "FOR YOUR INFORMATION: "
@@ -12,9 +13,9 @@ function usage() {
 }
 
 [ -e "$INSTALL_DIR/vcpkg/vcpkg" ] && usage && exit 0
-[ -e "$INSTALL_DIR/vcpkg" ] && rm -rf "$INSTALL_DIR/vcpkg"
+[ -e "$INSTALL_DIR/vcpkg" ] && mv "$INSTALL_DIR/vcpkg" "$INSTALL_DIR/vcpkg-${TS}"
 [ ! -e "$INSTALL_DIR" ] && mkdir -p "$INSTALL_DIR"
-sudo bash "$BASE/install_dependencies.sh"
+[ -e "$BASE/install_dependencies.sh" ] && sudo bash "$BASE/install_dependencies.sh"
 cd "$INSTALL_DIR"
 #git clone https://gitee.com/mirrors/vcpkg.git
 git clone https://github.com/Microsoft/vcpkg.git
