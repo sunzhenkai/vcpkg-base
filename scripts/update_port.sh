@@ -1,4 +1,5 @@
 #!/bin/bash
+# NOTE: deprecated
 #set -x
 PORT=$1
 

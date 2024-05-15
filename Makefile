@@ -3,4 +3,4 @@ install:
 resolve:
 	@bash scripts/install_dependencies.sh
 update:
-	@bash scripts/update_port.sh $(port)
+	@vcpkg --x-builtin-ports-root=./ports --x-builtin-registry-versions-dir=./versions x-add-version --all --verbose --overwrite-version
