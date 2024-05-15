@@ -1,0 +1,4 @@
+datastax-cpp-driver provides CMake targets:
+
+  find_package(cassandra_static CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE cassandra::cassandra_static)

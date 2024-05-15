@@ -1,0 +1,34 @@
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index d6627187..cecb24b9 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -263,9 +263,14 @@ endif()
+ # Install the dynamic/shared library
+ if(CASS_BUILD_SHARED)
+   install(TARGETS cassandra
++    EXPORT cassandra
+     RUNTIME DESTINATION ${INSTALL_DLL_EXE_DIR}  # for dll/executable/pdb files
+     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}  # for shared library
+     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}) # for static library
++  install(EXPORT cassandra
++          DESTINATION share/cassandra
++          FILE cassandraConfig.cmake
++          NAMESPACE cassandra::)
+   if(CASS_INSTALL_PKG_CONFIG)
+     if(NOT WIN32)
+       if(PKG_CONFIG_FOUND)
+@@ -284,9 +289,14 @@ endif()
+ 
+ if(CASS_BUILD_STATIC)
+   install(TARGETS cassandra_static
++    EXPORT cassandra_static
+     RUNTIME DESTINATION ${INSTALL_DLL_EXE_DIR}  # for dll/executable/pdb files
+     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}  # for shared library
+     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}) # for static library
++  install(EXPORT cassandra_static
++          DESTINATION share/cassandra_static
++          FILE cassandra_staticConfig.cmake
++          NAMESPACE cassandra::)
+   if(CASS_INSTALL_PKG_CONFIG)
+     if(NOT WIN32)
+       if(PKG_CONFIG_FOUND)

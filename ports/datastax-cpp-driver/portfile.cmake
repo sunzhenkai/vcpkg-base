@@ -1,10 +1,11 @@
-vcpkg_from_github(
+vcpkg_check_linkage(ONLY_STATIC_LIBRARY)
+
+vcpkg_from_git(
         OUT_SOURCE_PATH SOURCE_PATH
-        REPO datastax/cpp-driver
-        REF 2.17.0
-        SHA512 9589a6399f536ab03c27755e646c1195dd911c47c465815c21c15226e809cc4f8691f7c5a74ca0866b9aef377da16532be415015f544a939ea46ecd5644dff18
+        URL https://github.com/datastax/cpp-driver.git
+        REF "e05897d72fdac08a212ed3136b7790232670e329"
         HEAD_REF master
-        PATCHES cmake_deps.patch
+        PATCHES cmake.patch
 )
 
 message(STATUS "source path is ${SOURCE_PATH}, current packages dir is ${CURRENT_PACKAGES_DIR}")
@@ -12,17 +13,16 @@ message(STATUS "source path is ${SOURCE_PATH}, current packages dir is ${CURRENT
 vcpkg_cmake_configure(
         SOURCE_PATH ${SOURCE_PATH}
         OPTIONS
-        -DCASS_BUILD_SHARED=OFF 
+        -DCASS_BUILD_SHARED=OFF
         -DCASS_BUILD_STATIC=ON
 )
 
 vcpkg_install_cmake()
-vcpkg_copy_pdbs()
 vcpkg_fixup_pkgconfig()
+# copy from ${CONFIG_PATH} to share/${PACKAGE_NAME}
+vcpkg_cmake_config_fixup(PACKAGE_NAME "${PORT}" CONFIG_PATH "share/cassandra_static")
 
-if (VCPKG_LIBRARY_LINKAGE STREQUAL "static")
-    file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/bin" "${CURRENT_PACKAGES_DIR}/debug/bin")
-endif ()
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/share")
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
+file(INSTALL "${CMAKE_CURRENT_LIST_DIR}/usage" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}")
 file(INSTALL ${SOURCE_PATH}/LICENSE.txt DESTINATION ${CURRENT_PACKAGES_DIR}/share/${PORT} RENAME copyright)
