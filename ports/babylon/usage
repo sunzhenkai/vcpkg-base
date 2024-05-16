@@ -1,0 +1,4 @@
+babylon provides CMake targets:
+
+    find_package(babylon CONFIG REQUIRED)
+    list(APPEND TARGET_LIBRARIES babylon::babylon)
