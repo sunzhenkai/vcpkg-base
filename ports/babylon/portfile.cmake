@@ -11,7 +11,7 @@ message(STATUS "source path is ${SOURCE_PATH}, current packages dir is ${CURRENT
 
 vcpkg_cmake_configure(SOURCE_PATH ${SOURCE_PATH})
 vcpkg_install_cmake()
-vcpkg_cmake_config_fixup(PACKAGE_NAME "${PORT}" CONFIG_PATH "lib/cmake")
+vcpkg_cmake_config_fixup(PACKAGE_NAME "${PORT}" CONFIG_PATH "lib/cmake/babylon")
 
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/share")
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
