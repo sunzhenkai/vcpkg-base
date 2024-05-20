@@ -15,3 +15,8 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/sunzhenkai/vcpkg-base/main
 - automake
 - autoconf
 - ninja
+
+# overlay port
+```shell
+vcpkg install ppconsul --overlay-ports=/home/wii/code/vcpkg-base/ports/ppconsul
+```
