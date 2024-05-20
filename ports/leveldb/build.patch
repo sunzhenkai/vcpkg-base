@@ -1,5 +1,5 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index f8285b8..40897f9 100644
+index f8285b8..5380a81 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -38,9 +38,18 @@ include(CheckIncludeFile)
@@ -18,7 +18,7 @@ index f8285b8..40897f9 100644
 +    set(HAVE_SNAPPY 1)
 +endif()
 +if (WITH_SNAPPY)
-+    find_package(gperftools CONFIG REQUIRED COMPONENTS tcmalloc)
++    find_package(tcmalloc_static CONFIG REQUIRED)
 +    set(HAVE_TCMALLOC 1)
 +endif()
  
@@ -37,7 +37,7 @@ index f8285b8..40897f9 100644
  endif(HAVE_SNAPPY)
  if(HAVE_TCMALLOC)
 -  target_link_libraries(leveldb tcmalloc)
-+  target_link_libraries(leveldb gperftools::tcmalloc)
++  target_link_libraries(leveldb gperftools::tcmalloc_static)
  endif(HAVE_TCMALLOC)
  
  # Needed by port_stdcxx.h
