@@ -2,7 +2,7 @@ vcpkg_check_linkage(ONLY_STATIC_LIBRARY)
 
 vcpkg_from_git(
     OUT_SOURCE_PATH SOURCE_PATH
-    REPO https://github.com/google/leveldb.git
+    URL https://github.com/google/leveldb.git
     REF "99b3c03b3284f5886f9ef9a4ef703d57373e61be"
     HEAD_REF master
     PATCHES build.patch
