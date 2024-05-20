@@ -1,0 +1,55 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index f8285b8..40897f9 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -38,9 +38,18 @@ include(CheckIncludeFile)
+ check_include_file("unistd.h" HAVE_UNISTD_H)
+ 
+ include(CheckLibraryExists)
+-check_library_exists(crc32c crc32c_value "" HAVE_CRC32C)
+-check_library_exists(snappy snappy_compress "" HAVE_SNAPPY)
+-check_library_exists(tcmalloc malloc "" HAVE_TCMALLOC)
++if (WITH_CRC32C)
++    find_package(Crc32c CONFIG REQUIRED)
++    set(HAVE_CRC32C 1)
++endif()
++if (WITH_SNAPPY)
++    find_package(Snappy CONFIG REQUIRED)
++    set(HAVE_SNAPPY 1)
++endif()
++if (WITH_SNAPPY)
++    find_package(gperftools CONFIG REQUIRED COMPONENTS tcmalloc)
++    set(HAVE_TCMALLOC 1)
++endif()
+ 
+ include(CheckCXXSymbolExists)
+ # Using check_cxx_symbol_exists() instead of check_c_symbol_exists() because
+@@ -268,13 +277,13 @@ if(HAVE_CLANG_THREAD_SAFETY)
+ endif(HAVE_CLANG_THREAD_SAFETY)
+ 
+ if(HAVE_CRC32C)
+-  target_link_libraries(leveldb crc32c)
++  target_link_libraries(leveldb Crc32c::crc32c)
+ endif(HAVE_CRC32C)
+ if(HAVE_SNAPPY)
+-  target_link_libraries(leveldb snappy)
++  target_link_libraries(leveldb Snappy::snappy)
+ endif(HAVE_SNAPPY)
+ if(HAVE_TCMALLOC)
+-  target_link_libraries(leveldb tcmalloc)
++  target_link_libraries(leveldb gperftools::tcmalloc)
+ endif(HAVE_TCMALLOC)
+ 
+ # Needed by port_stdcxx.h
+@@ -471,6 +480,11 @@ if(LEVELDB_INSTALL)
+     DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/leveldb"
+   )
+ 
++  file(GLOB HEADER_UTIL "${PROJECT_SOURCE_DIR}/util/*.h" )
++  file(GLOB HEADER_TABLE "${PROJECT_SOURCE_DIR}/table/*.h" )
++  install(FILES ${HEADER_UTIL} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/leveldb/util)
++  install(FILES ${HEADER_TABLE} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/leveldb/table)
++
+   include(CMakePackageConfigHelpers)
+   configure_package_config_file(
+     "cmake/${PROJECT_NAME}Config.cmake.in"

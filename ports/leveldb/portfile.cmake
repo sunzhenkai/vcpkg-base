@@ -1,14 +1,11 @@
 vcpkg_check_linkage(ONLY_STATIC_LIBRARY)
 
-vcpkg_from_github(
+vcpkg_from_git(
     OUT_SOURCE_PATH SOURCE_PATH
-    REPO google/leveldb
-    REF "${VERSION}"
-    SHA512 ac15eac29387b9f702a901b6567d47a9f8c17cf5c7d8700a77ec771da25158c83b04959c33f3d4de7a3f033ef08f545d14ba823a8d527e21889c4b78065b0f84
+    REPO https://github.com/google/leveldb.git
+    REF "99b3c03b3284f5886f9ef9a4ef703d57373e61be"
     HEAD_REF master
-    PATCHES
-        fix-dependencies.patch
-        fix-util-install.patch
+    PATCHES build.patch
 )
 
 file(COPY "${CURRENT_PORT_DIR}/leveldbConfig.cmake.in" DESTINATION "${SOURCE_PATH}/cmake")
