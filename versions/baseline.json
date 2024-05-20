@@ -16,6 +16,10 @@
       "baseline": "2.15",
       "port-version": 0
     },
+    "leveldb": {
+      "baseline": "1.23.0",
+      "port-version": 0
+    },
     "ppconsul": {
       "baseline": "0.2.3",
       "port-version": 0
