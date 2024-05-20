@@ -5,15 +5,16 @@ vcpkg_from_git(
         URL https://github.com/oliora/ppconsul.git
         REF 1a889ce54cc10be4186daa48ccf7003588ceaade
         HEAD_REF master
+        PATCHES build.patch
 )
 
 # Force the use of the vcpkg installed versions
 file(REMOVE_RECURSE "${SOURCE_PATH}/ext/json11")
-file(REMOVE_RECURSE "${SOURCE_PATH}/ext/catch")
+#file(REMOVE_RECURSE "${SOURCE_PATH}/ext/catch")
 
 vcpkg_cmake_configure(
         SOURCE_PATH "${SOURCE_PATH}"
-        OPTIONS -DBUILD_STATIC_LIB=ON
+        OPTIONS -DBUILD_STATIC_LIB=ON -DVERSION=0.2.3
 )
 vcpkg_cmake_install()
 
