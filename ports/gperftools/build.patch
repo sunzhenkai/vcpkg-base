@@ -1,5 +1,5 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 22c4d1c..fcfb061 100644
+index 22c4d1c..7dffe08 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -799,7 +799,14 @@ endif()
@@ -14,7 +14,7 @@ index 22c4d1c..fcfb061 100644
 +INSTALL(EXPORT tcmalloc_minimal
 +        DESTINATION share/tcmalloc_minimal
 +        FILE tcmalloc_minimalConfig.cmake
-+        NAMESPACE gperftools::)
++        NAMESPACE tcmalloc_minimal::)
  if(GPERFTOOLS_BUILD_STATIC)
      add_library(tcmalloc_minimal_static STATIC ${libtcmalloc_minimal_internal_la_SOURCES})
      target_compile_definitions(tcmalloc_minimal_static PRIVATE NO_TCMALLOC_SAMPLES NDEBUG)
@@ -30,7 +30,7 @@ index 22c4d1c..fcfb061 100644
 +    INSTALL(EXPORT tcmalloc_minimal_static
 +        DESTINATION share/tcmalloc_minimal_static
 +        FILE tcmalloc_minimal_staticConfig.cmake
-+        NAMESPACE gperftools::)
++        NAMESPACE tcmalloc_minimal::)
  endif()
  
  if(BUILD_TESTING)
@@ -111,7 +111,7 @@ index 22c4d1c..fcfb061 100644
 +  INSTALL(EXPORT tcmalloc
 +    DESTINATION share/tcmalloc
 +    FILE tcmallocConfig.cmake
-+    NAMESPACE gperftools::)
++    NAMESPACE tcmalloc::)
    if(GPERFTOOLS_BUILD_STATIC)
      add_library(tcmalloc_static STATIC ${libtcmalloc_la_SOURCES})
      target_compile_definitions(tcmalloc_static PRIVATE ${libtcmalloc_la_DEFINE})
@@ -127,7 +127,7 @@ index 22c4d1c..fcfb061 100644
 +    INSTALL(EXPORT tcmalloc_static
 +      DESTINATION share/tcmalloc_static
 +      FILE tcmalloc_staticConfig.cmake
-+      NAMESPACE gperftools::)
++      NAMESPACE tcmalloc::)
    endif()
  
    ### Unittests
@@ -203,7 +203,7 @@ index 22c4d1c..fcfb061 100644
 +  INSTALL(EXPORT profiler
 +    DESTINATION share/profiler
 +    FILE profilerConfig.cmake
-+    NAMESPACE gperftools::)
++    NAMESPACE profiler::)
    if(GPERFTOOLS_BUILD_STATIC)
      add_library(profiler_static STATIC ${libprofiler_la_SOURCES})
      target_link_libraries(profiler_static PRIVATE ${libprofiler_la_LIBADD})
@@ -218,7 +218,7 @@ index 22c4d1c..fcfb061 100644
 +    INSTALL(EXPORT profiler_static
 +      DESTINATION share/profiler_static
 +      FILE profiler_staticConfig.cmake
-+      NAMESPACE gperftools::)
++      NAMESPACE profiler::)
    endif()
  
    # See discussion above (under LIBTCMALLOC_MINIMAL) for why we do this.
@@ -234,7 +234,7 @@ index 22c4d1c..fcfb061 100644
 +      INSTALL(EXPORT tcmalloc_and_profiler
 +        DESTINATION share/tcmalloc_and_profiler
 +        FILE tcmalloc_and_profilerConfig.cmake
-+        NAMESPACE gperftools::)
++        NAMESPACE tcmalloc_and_profiler::)
        if(GPERFTOOLS_BUILD_STATIC)
          add_library(tcmalloc_and_profiler_static STATIC ${libtcmalloc_la_SOURCES} ${libprofiler_la_SOURCES})
          target_compile_definitions(tcmalloc_and_profiler_static PRIVATE ${libtcmalloc_la_DEFINE})
@@ -250,7 +250,7 @@ index 22c4d1c..fcfb061 100644
 +        INSTALL(EXPORT tcmalloc_and_profiler_static
 +          DESTINATION share/tcmalloc_and_profiler_static
 +          FILE tcmalloc_and_profiler_staticConfig.cmake
-+          NAMESPACE gperftools::)
++          NAMESPACE tcmalloc_and_profiler::)
        endif()
  
        if(BUILD_TESTING)
