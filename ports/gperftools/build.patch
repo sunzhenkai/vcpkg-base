@@ -1,5 +1,5 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 22c4d1c..bc68fc9 100644
+index 22c4d1c..fcfb061 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -799,7 +799,14 @@ endif()
@@ -104,7 +104,7 @@ index 22c4d1c..bc68fc9 100644
            SOVERSION ${TCMALLOC_SO_VERSION})
 -  install(TARGETS tcmalloc)
 +  # export(TARGETS tcmalloc_internal)
-+  install(TARGETS tcmalloc tcmalloc_internal stacktrace EXPORT tcmalloc 
++  install(TARGETS tcmalloc tcmalloc_internal stacktrace spinlock sysinfo logging EXPORT tcmalloc 
 +    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 +    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
 +    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
@@ -120,7 +120,7 @@ index 22c4d1c..bc68fc9 100644
      endif()
      target_link_libraries(tcmalloc_static PRIVATE ${libtcmalloc_la_LIBADD})
 -    install(TARGETS tcmalloc_static)
-+    install(TARGETS tcmalloc_static tcmalloc_internal stacktrace EXPORT tcmalloc_static 
++    install(TARGETS tcmalloc_static tcmalloc_internal stacktrace spinlock sysinfo logging EXPORT tcmalloc_static 
 +      LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 +      ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
 +      RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
@@ -196,7 +196,7 @@ index 22c4d1c..bc68fc9 100644
            SOVERSION ${PROFILER_SO_VERSION})
 -  install(TARGETS profiler)
 +  # export(TARGETS stacktrace fake_stacktrace_scope)
-+  install(TARGETS profiler stacktrace fake_stacktrace_scope EXPORT profiler 
++  install(TARGETS profiler stacktrace fake_stacktrace_scope spinlock sysinfo logging EXPORT profiler 
 +    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 +    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
 +    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
@@ -211,7 +211,7 @@ index 22c4d1c..bc68fc9 100644
        set_target_properties(profiler_static PROPERTIES OUTPUT_NAME profiler)
      endif()
 -    install(TARGETS profiler_static)
-+    install(TARGETS profiler_static stacktrace fake_stacktrace_scope EXPORT profiler_static 
++    install(TARGETS profiler_static stacktrace fake_stacktrace_scope spinlock sysinfo logging EXPORT profiler_static 
 +      LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 +      ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
 +      RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
@@ -227,7 +227,7 @@ index 22c4d1c..bc68fc9 100644
        # specify it twice causes link-time duplicate-definition errors. :-(
        target_link_libraries(tcmalloc_and_profiler PRIVATE ${libtcmalloc_la_LIBADD})
 -      install(TARGETS tcmalloc_and_profiler)
-+      install(TARGETS tcmalloc_and_profiler tcmalloc_internal stacktrace EXPORT tcmalloc_and_profiler 
++      install(TARGETS tcmalloc_and_profiler tcmalloc_internal stacktrace spinlock sysinfo logging EXPORT tcmalloc_and_profiler 
 +        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 +        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
 +        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
@@ -243,7 +243,7 @@ index 22c4d1c..bc68fc9 100644
                    OUTPUT_NAME tcmalloc_and_profiler)
          endif()
 -        install(TARGETS tcmalloc_and_profiler_static)
-+        install(TARGETS tcmalloc_and_profiler_static tcmalloc_internal stacktrace EXPORT tcmalloc_and_profiler_static 
++        install(TARGETS tcmalloc_and_profiler_static tcmalloc_internal stacktrace spinlock sysinfo logging EXPORT tcmalloc_and_profiler_static 
 +          LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 +          ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
 +          RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
