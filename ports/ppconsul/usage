@@ -1,0 +1,4 @@
+The ppconsul fmt provides CMake targets:
+
+    find_package(ppconsul CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE ppconsul)

@@ -1,0 +1,13 @@
+The package gperftools provides CMake targets:
+
+    find_package(tcmalloc_static CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE tcmalloc::tcmalloc_static)
+
+    find_package(tcmalloc_minimal_static CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE tcmalloc_minimal::tcmalloc_minimal_static)
+
+    find_package(profiler_static CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE profiler::profiler_static)
+
+    find_package(tcmalloc_and_profiler_static CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE tcmalloc_and_profiler::tcmalloc_and_profiler_static)
