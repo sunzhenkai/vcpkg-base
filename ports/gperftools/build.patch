@@ -1,24 +1,27 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 22c4d1c..a72408f 100644
+index 22c4d1c..ec39817 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -787,31 +787,47 @@ add_library(tcmalloc_minimal_internal INTERFACE)
- target_link_libraries(tcmalloc_minimal_internal INTERFACE ${LIBSPINLOCK})
- target_sources(tcmalloc_minimal_internal INTERFACE $<TARGET_OBJECTS:tcmalloc_minimal_internal_object>)
+@@ -488,7 +488,7 @@ endif()
+ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+ set(CMAKE_INCLUDE_CURRENT_DIR ON)
+ # This is so we can #include <gperftools/foo>
+-include_directories($<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>)
++include_directories($<INSTALL_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>)
  
-+set(INTERNAL_LIBRARIES $<BUILD_INTERFACE:spinlock> $<BUILD_INTERFACE:sysinfo> $<BUILD_INTERFACE:logging>)
-+
- set(libtcmalloc_minimal_la_SOURCES ${TCMALLOC_CC} ${TCMALLOC_MINIMAL_INCLUDES})
+ if(NOT WITH_STACK_TRACE)
+   add_compile_definitions(NO_TCMALLOC_SAMPLES)
+@@ -791,27 +791,41 @@ set(libtcmalloc_minimal_la_SOURCES ${TCMALLOC_CC} ${TCMALLOC_MINIMAL_INCLUDES})
  set(libtcmalloc_minimal_la_DEFINES NO_TCMALLOC_SAMPLES NDEBUG)
  add_library(tcmalloc_minimal SHARED ${libtcmalloc_minimal_la_SOURCES})
  target_compile_definitions(tcmalloc_minimal PRIVATE ${libtcmalloc_minimal_la_DEFINES})
 -set(libtcmalloc_minimal_la_LIBADD tcmalloc_minimal_internal)
 -target_link_libraries(tcmalloc_minimal PRIVATE tcmalloc_minimal_internal Threads::Threads)
-+set(libtcmalloc_minimal_la_LIBADD $<BUILD_INTERFACE:tcmalloc_minimal_internal>)
-+target_link_libraries(tcmalloc_minimal PRIVATE $<BUILD_INTERFACE:tcmalloc_minimal_internal> ${INTERNAL_LIBRARIES} Threads::Threads)
++set(libtcmalloc_minimal_la_LIBADD $<INSTALL_INTERFACE:tcmalloc_minimal_internal>)
++target_link_libraries(tcmalloc_minimal PRIVATE $<INSTALL_INTERFACE:tcmalloc_minimal_internal> Threads::Threads)
  if(MINGW)
 -  target_link_libraries(tcmalloc_minimal PRIVATE stacktrace)
-+  target_link_libraries(tcmalloc_minimal PRIVATE $<BUILD_INTERFACE:stacktrace>)
++  target_link_libraries(tcmalloc_minimal PRIVATE $<INSTALL_INTERFACE:stacktrace>)
  endif()
  set_target_properties(tcmalloc_minimal PROPERTIES
          VERSION ${TCMALLOC_SO_VERSION}
@@ -36,10 +39,10 @@ index 22c4d1c..a72408f 100644
      add_library(tcmalloc_minimal_static STATIC ${libtcmalloc_minimal_internal_la_SOURCES})
      target_compile_definitions(tcmalloc_minimal_static PRIVATE NO_TCMALLOC_SAMPLES NDEBUG)
 -    target_link_libraries(tcmalloc_minimal_static PRIVATE tcmalloc_minimal_internal Threads::Threads)
-+    target_link_libraries(tcmalloc_minimal_static PRIVATE $<BUILD_INTERFACE:tcmalloc_minimal_internal> ${INTERNAL_LIBRARIES} Threads::Threads)
++    target_link_libraries(tcmalloc_minimal_static PRIVATE $<INSTALL_INTERFACE:tcmalloc_minimal_internal> Threads::Threads)
      if(MINGW)
 -      target_link_libraries(tcmalloc_minimal_static PRIVATE stacktrace)
-+      target_link_libraries(tcmalloc_minimal_static PRIVATE ${INTERNAL_LIBRARIES})
++      target_link_libraries(tcmalloc_minimal_static PRIVATE $<INSTALL_INTERFACE:stacktrace>)
      endif()
      if(NOT MSVC)
        set_target_properties(tcmalloc_minimal_static PROPERTIES
@@ -57,12 +60,9 @@ index 22c4d1c..a72408f 100644
  endif()
  
  if(BUILD_TESTING)
-@@ -986,12 +1002,19 @@ if(GPERFTOOLS_BUILD_DEBUGALLOC)
-   add_library(tcmalloc_minimal_debug SHARED ${libtcmalloc_minimal_debug_la_SOURCES})
-   target_compile_definitions(tcmalloc_minimal_debug PRIVATE ${libtcmalloc_minimal_la_DEFINES}
+@@ -988,10 +1002,17 @@ if(GPERFTOOLS_BUILD_DEBUGALLOC)
            TCMALLOC_FOR_DEBUGALLOCATION)
--  target_link_libraries(tcmalloc_minimal_debug PRIVATE ${libtcmalloc_minimal_la_LIBADD})
-+  target_link_libraries(tcmalloc_minimal_debug PRIVATE ${libtcmalloc_minimal_la_LIBADD} ${INTERNAL_LIBRARIES})
+   target_link_libraries(tcmalloc_minimal_debug PRIVATE ${libtcmalloc_minimal_la_LIBADD})
    target_link_libraries(tcmalloc_minimal_debug PRIVATE Threads::Threads)
 -  install(TARGETS tcmalloc_minimal_debug)
 +  install(TARGETS tcmalloc_minimal_debug EXPORT tcmalloc_minimal_debug 
@@ -79,13 +79,11 @@ index 22c4d1c..a72408f 100644
    if(GPERFTOOLS_BUILD_STATIC)
      add_library(tcmalloc_minimal_debug_static STATIC ${libtcmalloc_minimal_debug_la_SOURCES})
      target_compile_definitions(tcmalloc_minimal_debug_static PRIVATE ${libtcmalloc_minimal_la_DEFINES}
-@@ -1000,8 +1023,15 @@ if(GPERFTOOLS_BUILD_DEBUGALLOC)
-       set_target_properties(tcmalloc_minimal_debug_static PROPERTIES
+@@ -1001,7 +1022,14 @@ if(GPERFTOOLS_BUILD_DEBUGALLOC)
                OUTPUT_NAME tcmalloc_minimal_debug)
      endif()
--    target_link_libraries(tcmalloc_minimal_debug_static PRIVATE ${libtcmalloc_minimal_la_LIBADD})
+     target_link_libraries(tcmalloc_minimal_debug_static PRIVATE ${libtcmalloc_minimal_la_LIBADD})
 -    install(TARGETS tcmalloc_minimal_debug_static)
-+    target_link_libraries(tcmalloc_minimal_debug_static PRIVATE ${libtcmalloc_minimal_la_LIBADD} ${INTERNAL_LIBRARIES})
 +    install(TARGETS tcmalloc_minimal_debug_static EXPORT tcmalloc_minimal_debug_static 
 +    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 +    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -97,25 +95,21 @@ index 22c4d1c..a72408f 100644
    endif()
  
    ### Unittests
-@@ -1117,7 +1147,7 @@ if(GPERFTOOLS_BUILD_HEAP_CHECKER OR GPERFTOOLS_BUILD_HEAP_PROFILER)
+@@ -1117,7 +1145,7 @@ if(GPERFTOOLS_BUILD_HEAP_CHECKER OR GPERFTOOLS_BUILD_HEAP_PROFILER)
  
    set(libtcmalloc_la_SOURCES ${TCMALLOC_CC} ${TCMALLOC_INCLUDES})
    set(libtcmalloc_la_DEFINE NDEBUG ${EMERGENCY_MALLOC_DEFINE})
 -  set(libtcmalloc_la_LIBADD tcmalloc_internal Threads::Threads)
-+  set(libtcmalloc_la_LIBADD $<BUILD_INTERFACE:tcmalloc_internal> Threads::Threads)
++  set(libtcmalloc_la_LIBADD $<INSTALL_INTERFACE:tcmalloc_internal> Threads::Threads)
    if(GPERFTOOLS_BUILD_HEAP_CHECKER)
      # heap-checker-bcad is last, in hopes its global ctor will run first.
      # (Note this is added to libtcmalloc.la, not libtcmalloc_internal.la,
-@@ -1140,19 +1170,33 @@ if(GPERFTOOLS_BUILD_HEAP_CHECKER OR GPERFTOOLS_BUILD_HEAP_PROFILER)
- 
-   add_library(tcmalloc SHARED ${libtcmalloc_la_SOURCES})
-   target_compile_definitions(tcmalloc PRIVATE ${libtcmalloc_la_DEFINE})
--  target_link_libraries(tcmalloc ${libtcmalloc_la_LIBADD})
-+  target_link_libraries(tcmalloc ${libtcmalloc_la_LIBADD} ${INTERNAL_LIBRARIES})
+@@ -1144,7 +1172,15 @@ if(GPERFTOOLS_BUILD_HEAP_CHECKER OR GPERFTOOLS_BUILD_HEAP_PROFILER)
    set_target_properties(tcmalloc PROPERTIES
            VERSION ${TCMALLOC_SO_VERSION}
            SOVERSION ${TCMALLOC_SO_VERSION})
 -  install(TARGETS tcmalloc)
++  # export(TARGETS tcmalloc_internal)
 +  install(TARGETS tcmalloc EXPORT tcmalloc 
 +    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 +    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -127,12 +121,11 @@ index 22c4d1c..a72408f 100644
    if(GPERFTOOLS_BUILD_STATIC)
      add_library(tcmalloc_static STATIC ${libtcmalloc_la_SOURCES})
      target_compile_definitions(tcmalloc_static PRIVATE ${libtcmalloc_la_DEFINE})
-     if(NOT MSVC)
+@@ -1152,7 +1188,14 @@ if(GPERFTOOLS_BUILD_HEAP_CHECKER OR GPERFTOOLS_BUILD_HEAP_PROFILER)
        set_target_properties(tcmalloc_static PROPERTIES OUTPUT_NAME tcmalloc)
      endif()
--    target_link_libraries(tcmalloc_static PRIVATE ${libtcmalloc_la_LIBADD})
+     target_link_libraries(tcmalloc_static PRIVATE ${libtcmalloc_la_LIBADD})
 -    install(TARGETS tcmalloc_static)
-+    target_link_libraries(tcmalloc_static PRIVATE ${libtcmalloc_la_LIBADD} ${INTERNAL_LIBRARIES})
 +    install(TARGETS tcmalloc_static EXPORT tcmalloc_static 
 +    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 +    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -144,12 +137,7 @@ index 22c4d1c..a72408f 100644
    endif()
  
    ### Unittests
-@@ -1265,21 +1309,35 @@ if(GPERFTOOLS_BUILD_DEBUGALLOC)
-     add_library(tcmalloc_debug SHARED src/debugallocation.cc ${HEAP_CHECKER_SOURCES} ${TCMALLOC_INCLUDES})
-     target_compile_definitions(tcmalloc_debug PRIVATE ${libtcmalloc_la_DEFINE}
-             TCMALLOC_FOR_DEBUGALLOCATION)
--    target_link_libraries(tcmalloc_debug PRIVATE ${libtcmalloc_la_LIBADD})
-+    target_link_libraries(tcmalloc_debug PRIVATE ${libtcmalloc_la_LIBADD} ${INTERNAL_LIBRARIES})
+@@ -1269,7 +1312,14 @@ if(GPERFTOOLS_BUILD_DEBUGALLOC)
      set_target_properties(tcmalloc_debug PROPERTIES
              VERSION ${TCMALLOC_SO_VERSION}
              SOVERSION ${TCMALLOC_SO_VERSION})
@@ -165,10 +153,7 @@ index 22c4d1c..a72408f 100644
      if(GPERFTOOLS_BUILD_STATIC)
        add_library(tcmalloc_debug_static STATIC src/debugallocation.cc ${HEAP_CHECKER_SOURCES} ${TCMALLOC_INCLUDES})
        target_compile_definitions(tcmalloc_debug_static PRIVATE ${libtcmalloc_la_DEFINE}
-               TCMALLOC_FOR_DEBUGALLOCATION)
--      target_link_libraries(tcmalloc_debug_static PRIVATE ${libtcmalloc_la_LIBADD})
-+      target_link_libraries(tcmalloc_debug_static PRIVATE ${libtcmalloc_la_LIBADD} ${INTERNAL_LIBRARIES})
-       if(NOT MSVC)
+@@ -1279,7 +1329,14 @@ if(GPERFTOOLS_BUILD_DEBUGALLOC)
          set_target_properties(tcmalloc_debug_static PROPERTIES
                  OUTPUT_NAME tcmalloc_debug)
        endif()
@@ -184,20 +169,20 @@ index 22c4d1c..a72408f 100644
      endif()
  
      ### Unittests
-@@ -1335,21 +1393,35 @@ if(GPERFTOOLS_BUILD_CPU_PROFILER)
+@@ -1335,21 +1392,36 @@ if(GPERFTOOLS_BUILD_CPU_PROFILER)
            src/profile-handler.cc
            src/profiledata.cc
            ${CPU_PROFILER_INCLUDES})
 -  set(libprofiler_la_LIBADD stacktrace fake_stacktrace_scope)
-+  set(libprofiler_la_LIBADD $<BUILD_INTERFACE:stacktrace> $<BUILD_INTERFACE:fake_stacktrace_scope>)
++  set(libprofiler_la_LIBADD $<INSTALL_INTERFACE:stacktrace> $<INSTALL_INTERFACE:fake_stacktrace_scope>)
    add_library(profiler SHARED ${libprofiler_la_SOURCES})
--  target_link_libraries(profiler PRIVATE ${libprofiler_la_LIBADD})
-+  target_link_libraries(profiler PRIVATE ${libprofiler_la_LIBADD} ${INTERNAL_LIBRARIES})
+   target_link_libraries(profiler PRIVATE ${libprofiler_la_LIBADD})
    target_link_libraries(profiler PRIVATE Threads::Threads)
    set_target_properties(profiler PROPERTIES
            VERSION ${PROFILER_SO_VERSION}
            SOVERSION ${PROFILER_SO_VERSION})
 -  install(TARGETS profiler)
++  # export(TARGETS stacktrace fake_stacktrace_scope)
 +  install(TARGETS profiler EXPORT profiler 
 +  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 +  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -208,8 +193,7 @@ index 22c4d1c..a72408f 100644
 +  NAMESPACE gperftools::)
    if(GPERFTOOLS_BUILD_STATIC)
      add_library(profiler_static STATIC ${libprofiler_la_SOURCES})
--    target_link_libraries(profiler_static PRIVATE ${libprofiler_la_LIBADD})
-+    target_link_libraries(profiler_static PRIVATE ${libprofiler_la_LIBADD} ${INTERNAL_LIBRARIES})
+     target_link_libraries(profiler_static PRIVATE ${libprofiler_la_LIBADD})
      if(NOT MSVC)
        set_target_properties(profiler_static PROPERTIES OUTPUT_NAME profiler)
      endif()
@@ -225,13 +209,11 @@ index 22c4d1c..a72408f 100644
    endif()
  
    # See discussion above (under LIBTCMALLOC_MINIMAL) for why we do this.
-@@ -1416,17 +1488,31 @@ if(GPERFTOOLS_BUILD_HEAP_PROFILER OR GPERFTOOLS_BUILD_HEAP_CHECKER)
-       # We don't include libprofiler_la_LIBADD here because all it adds is
+@@ -1417,7 +1489,14 @@ if(GPERFTOOLS_BUILD_HEAP_PROFILER OR GPERFTOOLS_BUILD_HEAP_CHECKER)
        # libstacktrace.la, which we already get via libtcmalloc.  Trying to
        # specify it twice causes link-time duplicate-definition errors. :-(
--      target_link_libraries(tcmalloc_and_profiler PRIVATE ${libtcmalloc_la_LIBADD})
+       target_link_libraries(tcmalloc_and_profiler PRIVATE ${libtcmalloc_la_LIBADD})
 -      install(TARGETS tcmalloc_and_profiler)
-+      target_link_libraries(tcmalloc_and_profiler PRIVATE ${libtcmalloc_la_LIBADD} ${INTERNAL_LIBRARIES})
 +      install(TARGETS tcmalloc_and_profiler EXPORT tcmalloc_and_profiler 
 +      LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 +      ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -243,9 +225,7 @@ index 22c4d1c..a72408f 100644
        if(GPERFTOOLS_BUILD_STATIC)
          add_library(tcmalloc_and_profiler_static STATIC ${libtcmalloc_la_SOURCES} ${libprofiler_la_SOURCES})
          target_compile_definitions(tcmalloc_and_profiler_static PRIVATE ${libtcmalloc_la_DEFINE})
--        target_link_libraries(tcmalloc_and_profiler_static PRIVATE ${libtcmalloc_la_LIBADD})
-+        target_link_libraries(tcmalloc_and_profiler_static PRIVATE ${libtcmalloc_la_LIBADD} ${INTERNAL_LIBRARIES})
-         if(NOT MSVC)
+@@ -1426,7 +1505,14 @@ if(GPERFTOOLS_BUILD_HEAP_PROFILER OR GPERFTOOLS_BUILD_HEAP_CHECKER)
            set_target_properties(tcmalloc_and_profiler_static PROPERTIES
                    OUTPUT_NAME tcmalloc_and_profiler)
          endif()
