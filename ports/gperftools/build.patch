@@ -1,12 +1,12 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 22c4d1c..583e55a 100644
+index 22c4d1c..a72408f 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -787,31 +787,47 @@ add_library(tcmalloc_minimal_internal INTERFACE)
  target_link_libraries(tcmalloc_minimal_internal INTERFACE ${LIBSPINLOCK})
  target_sources(tcmalloc_minimal_internal INTERFACE $<TARGET_OBJECTS:tcmalloc_minimal_internal_object>)
  
-+set(INTERNAL_LIBRARIES $<BUILD_INTERFACE:spinlock> $<BUILD_INTERFACE:sysinfo> $<BUILD_INTERFACE:logging> $<BUILD_INTERFACE:stacktrace>)
++set(INTERNAL_LIBRARIES $<BUILD_INTERFACE:spinlock> $<BUILD_INTERFACE:sysinfo> $<BUILD_INTERFACE:logging>)
 +
  set(libtcmalloc_minimal_la_SOURCES ${TCMALLOC_CC} ${TCMALLOC_MINIMAL_INCLUDES})
  set(libtcmalloc_minimal_la_DEFINES NO_TCMALLOC_SAMPLES NDEBUG)
@@ -106,7 +106,7 @@ index 22c4d1c..583e55a 100644
    if(GPERFTOOLS_BUILD_HEAP_CHECKER)
      # heap-checker-bcad is last, in hopes its global ctor will run first.
      # (Note this is added to libtcmalloc.la, not libtcmalloc_internal.la,
-@@ -1140,19 +1170,34 @@ if(GPERFTOOLS_BUILD_HEAP_CHECKER OR GPERFTOOLS_BUILD_HEAP_PROFILER)
+@@ -1140,19 +1170,33 @@ if(GPERFTOOLS_BUILD_HEAP_CHECKER OR GPERFTOOLS_BUILD_HEAP_PROFILER)
  
    add_library(tcmalloc SHARED ${libtcmalloc_la_SOURCES})
    target_compile_definitions(tcmalloc PRIVATE ${libtcmalloc_la_DEFINE})
@@ -116,7 +116,6 @@ index 22c4d1c..583e55a 100644
            VERSION ${TCMALLOC_SO_VERSION}
            SOVERSION ${TCMALLOC_SO_VERSION})
 -  install(TARGETS tcmalloc)
-+  # export(TARGETS tcmalloc_internal)
 +  install(TARGETS tcmalloc EXPORT tcmalloc 
 +    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 +    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -145,7 +144,7 @@ index 22c4d1c..583e55a 100644
    endif()
  
    ### Unittests
-@@ -1265,21 +1310,35 @@ if(GPERFTOOLS_BUILD_DEBUGALLOC)
+@@ -1265,21 +1309,35 @@ if(GPERFTOOLS_BUILD_DEBUGALLOC)
      add_library(tcmalloc_debug SHARED src/debugallocation.cc ${HEAP_CHECKER_SOURCES} ${TCMALLOC_INCLUDES})
      target_compile_definitions(tcmalloc_debug PRIVATE ${libtcmalloc_la_DEFINE}
              TCMALLOC_FOR_DEBUGALLOCATION)
@@ -185,7 +184,7 @@ index 22c4d1c..583e55a 100644
      endif()
  
      ### Unittests
-@@ -1335,21 +1394,36 @@ if(GPERFTOOLS_BUILD_CPU_PROFILER)
+@@ -1335,21 +1393,35 @@ if(GPERFTOOLS_BUILD_CPU_PROFILER)
            src/profile-handler.cc
            src/profiledata.cc
            ${CPU_PROFILER_INCLUDES})
@@ -199,7 +198,6 @@ index 22c4d1c..583e55a 100644
            VERSION ${PROFILER_SO_VERSION}
            SOVERSION ${PROFILER_SO_VERSION})
 -  install(TARGETS profiler)
-+  # export(TARGETS stacktrace fake_stacktrace_scope)
 +  install(TARGETS profiler EXPORT profiler 
 +  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 +  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -227,7 +225,7 @@ index 22c4d1c..583e55a 100644
    endif()
  
    # See discussion above (under LIBTCMALLOC_MINIMAL) for why we do this.
-@@ -1416,17 +1490,31 @@ if(GPERFTOOLS_BUILD_HEAP_PROFILER OR GPERFTOOLS_BUILD_HEAP_CHECKER)
+@@ -1416,17 +1488,31 @@ if(GPERFTOOLS_BUILD_HEAP_PROFILER OR GPERFTOOLS_BUILD_HEAP_CHECKER)
        # We don't include libprofiler_la_LIBADD here because all it adds is
        # libstacktrace.la, which we already get via libtcmalloc.  Trying to
        # specify it twice causes link-time duplicate-definition errors. :-(
