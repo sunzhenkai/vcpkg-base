@@ -24,6 +24,14 @@
     "numactl",
     "protobuf",
     "ragel",
+    {
+      "name": "vcpkg-cmake",
+      "host": true
+    },
+    {
+      "name": "vcpkg-cmake-config",
+      "host": true
+    },
     "yaml-cpp"
   ],
   "features": {
