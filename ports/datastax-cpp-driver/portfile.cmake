@@ -18,7 +18,7 @@ vcpkg_cmake_configure(
 )
 
 vcpkg_install_cmake()
-vcpkg_fixup_pkgconfig()
+vcpkg_fixup_pkgconfig(SKIP_CHECK)
 # copy from ${CONFIG_PATH} to share/${PACKAGE_NAME}
 vcpkg_cmake_config_fixup(PACKAGE_NAME "${PORT}" CONFIG_PATH "share/cassandra_static")
 

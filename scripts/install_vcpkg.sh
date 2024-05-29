@@ -15,7 +15,7 @@ function usage() {
 [ -e "$INSTALL_DIR/vcpkg/vcpkg" ] && usage && exit 0
 [ -e "$INSTALL_DIR/vcpkg" ] && mv "$INSTALL_DIR/vcpkg" "$INSTALL_DIR/vcpkg-${TS}"
 [ ! -e "$INSTALL_DIR" ] && mkdir -p "$INSTALL_DIR"
-[ -e "$BASE/install_dependencies.sh" ] && sudo bash "$BASE/install_dependencies.sh"
+[ -e "$BASE/install_dependencies.sh" ] && bash "$BASE/install_dependencies.sh"
 cd "$INSTALL_DIR"
 #git clone https://gitee.com/mirrors/vcpkg.git
 git clone https://github.com/Microsoft/vcpkg.git
