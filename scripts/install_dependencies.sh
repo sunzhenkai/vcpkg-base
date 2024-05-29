@@ -13,15 +13,17 @@ else
 fi
 
 debian_packages=(
-    autoconf
     curl
     zip
     unzip
     tar
+    wget
     cmake
+    autoconf
     ninja-build
     make
     git
+    pkg-config
     libtool
     libpciaccess-dev
     xfslibs-dev
@@ -31,7 +33,7 @@ debian_packages=(
     valgrind
     bison
     flex
-    pkg-config
+    kernel-devel
 )
 
 fedora_packages=(
@@ -40,6 +42,7 @@ fedora_packages=(
 # centos7 & centos8 common packages
 redhat_packages=(
     perl-IPC-Cmd
+    perl-Data-Dumper
     flex
     bison
 )

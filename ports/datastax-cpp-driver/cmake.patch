@@ -1,8 +1,60 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index f9bf6d34..a5f27970 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -7,6 +7,25 @@ set(CASS_INCLUDE_DIR "${CASS_ROOT_DIR}/include")
+ 
+ # Ensure functions/modules are available
+ list(APPEND CMAKE_MODULE_PATH ${CASS_ROOT_DIR}/cmake)
++# libuv
++find_package(libuv CONFIG REQUIRED)
++set(CASS_LIBS ${CASS_LIBS} $<IF:$<TARGET_EXISTS:libuv::uv_a>,libuv::uv_a,libuv::uv>)
++# openssl
++find_package(OpenSSL REQUIRED)
++set(CASS_LIBS ${CASS_LIBS} OpenSSL::SSL OpenSSL::Crypto)
++# zlib
++find_package(ZLIB REQUIRED)
++set(CASS_LIBS ${CASS_LIBS} ZLIB::ZLIB)
++# threads
++find_package(Threads REQUIRED)
++set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_THREAD_LIBS_INIT}")
++set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${CMAKE_THREAD_LIBS_INIT}")
++if(NOT WIN32 AND ${CMAKE_VERSION} VERSION_LESS "3.1.0")
++  # FindThreads in CMake versions < v3.1.0 do not have the THREADS_PREFER_PTHREAD_FLAG to prefer -pthread
++  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
++  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pthread")
++endif()
++
+ 
+ set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
+ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+@@ -81,7 +100,7 @@ endif()
+ # Dependencies
+ #------------------------
+ 
+-include(Dependencies)
++#include(Dependencies)
+ include(ClangFormat)
+ 
+ #------------------------
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index d6627187..cecb24b9 100644
+index d6627187..251e07c9 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
-@@ -263,9 +263,14 @@ endif()
+@@ -3,6 +3,12 @@ include(CheckCXXSourceCompiles)
+ 
+ file(GLOB SOURCES *.cpp *.hpp)
+ 
++if(WIN32)
++  # Assign additional library requirements for Windows
++  set(CASS_LIBS ${CASS_LIBS} iphlpapi psapi wsock32 crypt32 ws2_32 userenv version)
++endif()
++
++
+ if(APPLE)
+   list(REMOVE_ITEM SOURCES ${CASS_SRC_DIR}/get_time-unix.cpp ${CASS_SRC_DIR}/get_time-win.cpp)
+ elseif(UNIX)
+@@ -263,9 +269,14 @@ endif()
  # Install the dynamic/shared library
  if(CASS_BUILD_SHARED)
    install(TARGETS cassandra
@@ -17,7 +69,7 @@ index d6627187..cecb24b9 100644
    if(CASS_INSTALL_PKG_CONFIG)
      if(NOT WIN32)
        if(PKG_CONFIG_FOUND)
-@@ -284,9 +289,14 @@ endif()
+@@ -284,9 +295,14 @@ endif()
  
  if(CASS_BUILD_STATIC)
    install(TARGETS cassandra_static
