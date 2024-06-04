@@ -1,0 +1,14 @@
+diff --git a/exporters/jaeger/CMakeLists.txt b/exporters/jaeger/CMakeLists.txt
+index 222084ee..347130e9 100644
+--- a/exporters/jaeger/CMakeLists.txt
++++ b/exporters/jaeger/CMakeLists.txt
+@@ -69,8 +69,7 @@ if(OPENTELEMETRY_INSTALL)
+     DIRECTORY include/opentelemetry/exporters/jaeger
+     DESTINATION include/opentelemetry/exporters
+     FILES_MATCHING
+-    PATTERN "*.h"
+-    PATTERN "recordable.h" EXCLUDE)
++    PATTERN "*.h")
+ endif()
+ 
+ if(BUILD_TESTING)
