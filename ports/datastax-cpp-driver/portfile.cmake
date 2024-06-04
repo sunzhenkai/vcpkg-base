@@ -15,6 +15,8 @@ vcpkg_cmake_configure(
         OPTIONS
         -DCASS_BUILD_SHARED=OFF
         -DCASS_BUILD_STATIC=ON
+        -DCASS_USE_STATIC_LIBS=ON
+        -DCASS_USE_STD_ATOMIC=ON
 )
 
 vcpkg_install_cmake()
