@@ -7,9 +7,7 @@
   "license": "Apache-2.0",
   "supports": "linux & x64",
   "dependencies": [
-    "curl",
     "libuv",
-    "openssl",
     {
       "name": "vcpkg-cmake",
       "host": true
@@ -17,7 +15,20 @@
     {
       "name": "vcpkg-cmake-config",
       "host": true
+    }
+  ],
+  "features": {
+    "openssl": {
+      "description": "use openssl",
+      "dependencies": [
+        "openssl"
+      ]
     },
-    "zlib"
-  ]
+    "zlib": {
+      "description": "use zlib",
+      "dependencies": [
+        "zlib"
+      ]
+    }
+  }
 }

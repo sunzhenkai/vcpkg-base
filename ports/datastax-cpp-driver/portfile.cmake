@@ -10,6 +10,12 @@ vcpkg_from_git(
 
 message(STATUS "source path is ${SOURCE_PATH}, current packages dir is ${CURRENT_PACKAGES_DIR}")
 
+vcpkg_check_features(OUT_FEATURE_OPTIONS FEATURE_OPTIONS
+        FEATURES
+        zlib CASS_USE_ZLIB
+        openssl CASS_USE_OPENSSL
+)
+
 vcpkg_cmake_configure(
         SOURCE_PATH ${SOURCE_PATH}
         OPTIONS
