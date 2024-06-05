@@ -17,3 +17,16 @@ index 222084ee..31c3ff12 100644
  endif()
  
  if(BUILD_TESTING)
+diff --git a/exporters/jaeger/include/opentelemetry/exporters/jaeger/recordable.h b/exporters/jaeger/include/opentelemetry/exporters/jaeger/recordable.h
+index b1b944fd..20fd6542 100644
+--- a/exporters/jaeger/include/opentelemetry/exporters/jaeger/recordable.h
++++ b/exporters/jaeger/include/opentelemetry/exporters/jaeger/recordable.h
+@@ -5,7 +5,7 @@
+ 
+ #include <opentelemetry/exporters/jaeger/thrift_include_prefix.h>
+ 
+-#include <jaeger_types.h>
++#include "jaeger_types.h"
+ 
+ #include <opentelemetry/exporters/jaeger/thrift_include_suffix.h>
+ 
