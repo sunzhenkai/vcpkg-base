@@ -14,6 +14,13 @@ vcpkg_execute_build_process(
     WORKING_DIRECTORY ${SOURCE_PATH}
     LOGNAME "build polaris")
 
+# for debug
+#execute_process(COMMAND mkdir -p ${SOURCE_PATH}/build64/lib COMMAND touch ${SOURCE_PATH}/build64/lib/libpolaris_api.a)
+
+# debug
+file(MAKE_DIRECTORY ${CURRENT_PACKAGES_DIR}/debug)
+file(COPY ${SOURCE_PATH}/build64/lib DESTINATION ${CURRENT_PACKAGES_DIR}/debug)
+# release
 file(COPY ${SOURCE_PATH}/build64/lib DESTINATION ${CURRENT_PACKAGES_DIR})
 file(COPY ${SOURCE_PATH}/include DESTINATION ${CURRENT_PACKAGES_DIR})
 
