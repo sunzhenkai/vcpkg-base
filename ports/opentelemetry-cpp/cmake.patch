@@ -1,5 +1,5 @@
 diff --git a/exporters/jaeger/CMakeLists.txt b/exporters/jaeger/CMakeLists.txt
-index 222084ee..7d2342af 100644
+index 222084ee..31c3ff12 100644
 --- a/exporters/jaeger/CMakeLists.txt
 +++ b/exporters/jaeger/CMakeLists.txt
 @@ -69,8 +69,12 @@ if(OPENTELEMETRY_INSTALL)
@@ -10,8 +10,8 @@ index 222084ee..7d2342af 100644
 -    PATTERN "recordable.h" EXCLUDE)
 +    PATTERN "*.h")
 +  install(
-+    DIRECTORY thrift-gen
-+    DESTINATION include/opentelemetry/exporters
++    DIRECTORY thrift-gen/
++    DESTINATION include/opentelemetry/exporters/jaeger
 +    FILES_MATCHING
 +    PATTERN "*.h")
  endif()
