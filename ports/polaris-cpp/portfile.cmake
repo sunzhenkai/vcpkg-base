@@ -12,16 +12,25 @@ message(STATUS "source path is ${SOURCE_PATH}, current packages dir is ${CURRENT
 vcpkg_execute_build_process(
     COMMAND make -j
     WORKING_DIRECTORY ${SOURCE_PATH}
-    LOGNAME ${PORT}-build)
+    LOGNAME "build_polaris")
+
+vcpkg_execute_build_process(
+    COMMAND ar rc libpolaris_api.a ${SOURCE_PATH}/build64/lib/libpolaris_api.a ${SOURCE_PATH}/third_party/protobuf/build64/libprotobuf.a
+    WORKING_DIRECTORY ${SOURCE_PATH}
+    LOGNAME "archive_polaris"
+)
+
+# add_custom_target(combined ALL
+#    COMMAND ${CMAKE_CXX_ARCHIVE_CREATE} libcombined.a $<TARGET_FILE:lib1> $<TARGET_FILE:lib2>)
 
 # for debug
 #execute_process(COMMAND mkdir -p ${SOURCE_PATH}/build64/lib COMMAND touch ${SOURCE_PATH}/build64/lib/libpolaris_api.a)
 
 # debug
 file(MAKE_DIRECTORY ${CURRENT_PACKAGES_DIR}/debug)
-file(COPY ${SOURCE_PATH}/build64/lib DESTINATION ${CURRENT_PACKAGES_DIR}/debug)
+file(COPY ${SOURCE_PATH}/libpolaris_api.a DESTINATION ${CURRENT_PACKAGES_DIR}/debug)
 # release
-file(COPY ${SOURCE_PATH}/build64/lib DESTINATION ${CURRENT_PACKAGES_DIR})
+file(COPY ${SOURCE_PATH}/libpolaris_api.a DESTINATION ${CURRENT_PACKAGES_DIR})
 file(COPY ${SOURCE_PATH}/include DESTINATION ${CURRENT_PACKAGES_DIR})
 
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
