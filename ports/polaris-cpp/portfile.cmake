@@ -17,13 +17,7 @@ vcpkg_execute_build_process(
 vcpkg_execute_build_process(
     COMMAND sh "${CMAKE_CURRENT_LIST_DIR}/re_archive.sh"
     WORKING_DIRECTORY ${SOURCE_PATH}
-    LOGNAME "extarct_polaris")
-    
-vcpkg_execute_build_process(
-    COMMAND ar rc libpolaris_api.a ${SOURCE_PATH}/build64/lib/libpolaris_api.a ${SOURCE_PATH}/third_party/protobuf/build64/libprotobuf.a
-    WORKING_DIRECTORY ${SOURCE_PATH}
-    LOGNAME "archive_polaris"
-)
+    LOGNAME "archive_polaris")
 
 # add_custom_target(combined ALL
 #    COMMAND ${CMAKE_CXX_ARCHIVE_CREATE} libcombined.a $<TARGET_FILE:lib1> $<TARGET_FILE:lib2>)
