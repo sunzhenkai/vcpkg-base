@@ -1,5 +1,5 @@
 FUNCTION(GenerateProtoBufMessage)
-    CMAKE_PARSE_ARGUMENTS(ARG "" "SRCS;HEADERS;OUTPUT;IMPORT" "FILES" ${ARGN})
+    CMAKE_PARSE_ARGUMENTS(ARG "" "SRCS;HEADERS;OUTPUT;IMPORT" "FILES;EXTERN_IMPORT" ${ARGN})
     # find protoc
     IF (NOT TARGET protobuf::protoc)
         FIND_PACKAGE(Protobuf CONFIG REQUIRED)
@@ -12,6 +12,10 @@ FUNCTION(GenerateProtoBufMessage)
     GET_PROPERTY(PB_EXECUTABLE TARGET protobuf::protoc PROPERTY LOCATION)
 
     STRING(LENGTH ${ARG_IMPORT} PROTO_PREFIX_LENGTH)
+    SET(IMPORT_ARGS "-I${ARG_IMPORT}")
+    FOREACH (I IN LISTS ARG_EXTERN_IMPORT)
+        SET(IMPORT_ARGS "-I${I} ${IMPORT_ARGS}")
+    ENDFOREACH ()
     FOREACH (I ${PROTO_FILES})
         STRING(LENGTH ${I} I_PATH_LENGTH)
         STRING(SUBSTRING ${I} 0 ${PROTO_PREFIX_LENGTH} I_PREFIX)
@@ -28,10 +32,7 @@ FUNCTION(GenerateProtoBufMessage)
         ENDIF ()
         RemoveExtension(${REV_PATH} REV_PATH)
         EXECUTE_PROCESS(
-                COMMAND ${PB_EXECUTABLE}
-                -I ${ARG_IMPORT}
-                --cpp_out ${ARG_OUTPUT}
-                ${I}
+                COMMAND bash -c "${PB_EXECUTABLE} ${IMPORT_ARGS} --cpp_out ${ARG_OUTPUT} ${I}"
                 RESULT_VARIABLE rc
         )
         if (NOT "${rc}" STREQUAL "0")
