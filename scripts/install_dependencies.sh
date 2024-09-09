@@ -33,7 +33,7 @@ debian_packages=(
     valgrind
     bison
     flex
-    kernel-devel
+    linux-headers-$(uname -r)
 )
 
 fedora_packages=(
