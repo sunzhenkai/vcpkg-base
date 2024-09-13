@@ -1,0 +1,31 @@
+{
+  "name": "grpc",
+  "version-semver": "1.26.0",
+  "port-version": 1,
+  "description": "An RPC library and framework",
+  "homepage": "https://github.com/grpc/grpc",
+  "dependencies": [
+    {
+      "name": "c-ares",
+      "platform": "!uwp"
+    },
+    "openssl",
+    "protobuf",
+    {
+      "name": "protobuf",
+      "host": true
+    },
+    "zlib"
+  ],
+  "features": {
+    "objc": {
+      "description": "objective c plugin"
+    },
+    "php": {
+      "description": "php plugin"
+    },
+    "ruby": {
+      "description": "ruby plugin"
+    }
+  }
+}
