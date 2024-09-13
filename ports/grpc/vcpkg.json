@@ -1,0 +1,32 @@
+{
+    "name": "grpc",
+    "version-semver": "1.22.0",
+    "port-version": 0,
+    "description": "An RPC library and framework",
+    "homepage": "https://github.com/grpc/grpc",
+    "dependencies": [
+        {
+            "name": "c-ares",
+            "platform": "!uwp"
+        },
+        {
+            "name": "grpc",
+            "host": true,
+            "features": [
+                "codegen"
+            ]
+        },
+        "openssl",
+        "protobuf",
+        {
+            "name": "protobuf",
+            "host": true
+        },
+        "zlib"
+    ],
+    "features": {
+        "codegen": {
+            "description": "Build code generator machinery"
+        }
+    }
+}
