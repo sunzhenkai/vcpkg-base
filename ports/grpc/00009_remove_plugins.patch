@@ -1,0 +1,49 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 3d4418ad61..691adef851 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -5198,14 +5198,27 @@ endif()
+ 
+ endif()
+ 
+-add_library(grpc_plugin_support
++set(GRPC_PLUGINS
+   src/compiler/cpp_generator.cc
+   src/compiler/csharp_generator.cc
+   src/compiler/node_generator.cc
+-  src/compiler/objective_c_generator.cc
+-  src/compiler/php_generator.cc
+   src/compiler/python_generator.cc
+-  src/compiler/ruby_generator.cc
++	)
++if (gRPC_BUILD_GRPC_RUBY_PLUGIN)
++  list(APPEND GRPC_PLUGINS src/compiler/ruby_generator.cc)
++endif()
++if (gRPC_BUILD_GRPC_PHP_PLUGIN)
++  list(APPEND GRPC_PLUGINS src/compiler/php_generator.cc)
++endif()
++if (DgRPC_BUILD_GRPC_OBJECTIVE_C_PLUGIN)
++  list(APPEND GRPC_PLUGINS src/compiler/objective_c_generator.cc)
++endif()
++
++
++
++
++add_library(grpc_plugin_support
++	${GRPC_PLUGINS}
+ )
+ 
+ set_target_properties(grpc_plugin_support PROPERTIES
+diff --git a/src/cpp/server/channelz/channelz_service.cc b/src/cpp/server/channelz/channelz_service.cc
+index 62852bfab4..c92e7eabc1 100644
+--- a/src/cpp/server/channelz/channelz_service.cc
++++ b/src/cpp/server/channelz/channelz_service.cc
+@@ -27,7 +27,7 @@ namespace grpc {
+ grpc::protobuf::util::Status ParseJson(const char* json_str,
+                                        grpc::protobuf::Message* message) {
+   grpc::protobuf::json::JsonParseOptions options;
+-  options.case_insensitive_enum_parsing = true;
++  //options.case_insensitive_enum_parsing = true;
+   return grpc::protobuf::json::JsonStringToMessage(json_str, message, options);
+ }
+ 
