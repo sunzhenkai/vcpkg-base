@@ -18,14 +18,14 @@
     "zlib"
   ],
   "features": {
-    "ruby": {
-      "description": "ruby plugin"
+    "objc": {
+      "description": "objective c plugin"
     },
     "php": {
       "description": "php plugin"
     },
-    "objc": {
-      "description": "objective c plugin"
+    "ruby": {
+      "description": "ruby plugin"
     }
   }
 }
