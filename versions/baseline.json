@@ -16,6 +16,10 @@
       "baseline": "2.15",
       "port-version": 0
     },
+    "grpc": {
+      "baseline": "1.26.0",
+      "port-version": 1
+    },
     "leveldb": {
       "baseline": "1.23.0",
       "port-version": 0
