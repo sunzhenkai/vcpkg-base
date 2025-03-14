@@ -1,15 +1,33 @@
 vcpkg_check_linkage(ONLY_STATIC_LIBRARY)
-include(vcpkg_common_functions)
 
-vcpkg_from_github(
-        OUT_SOURCE_PATH SOURCE_PATH
-        URL aerospike/aerospike-client-c
-        REF 7.0.3
-        HEAD_REF master
+set(GIT_REF 7.0.3)
+set(GIT_URL https://github.com/aerospike/aerospike-client-c.git)
+
+# custome clone git repo
+set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/${GIT_REF})
+file(MAKE_DIRECTORY ${SOURCE_PATH})
+if (NOT EXISTS "${SOURCE_PATH}/.git")
+    message(STATUS "Cloning")
+    vcpkg_execute_required_process(
+            COMMAND ${GIT} clone ${GIT_URL} ${SOURCE_PATH}
+            WORKING_DIRECTORY ${SOURCE_PATH}
+            LOGNAME clone
+    )
+endif ()
+
+message(STATUS "Checkout revision ${GIT_REF}")
+vcpkg_execute_required_process(
+        COMMAND ${GIT} checkout ${GIT_REF}
+        WORKING_DIRECTORY ${SOURCE_PATH}
+        LOGNAME checkout
 )
-#REF d2ac108e3cda6cee7a7ee2ac774eecaeeb12b583
 
-message(STATUS "source path is ${SOURCE_PATH}, current packages dir is ${CURRENT_PACKAGES_DIR}")
+message(STATUS "Fetching submodules")
+vcpkg_execute_required_process(
+        COMMAND ${GIT} submodule update --init
+        WORKING_DIRECTORY ${SOURCE_PATH}
+        LOGNAME submodule
+)
 
 set(MAKE_OPTS "")
 if(VCPKG_LIBRARY_LINKAGE STREQUAL "static")
@@ -17,15 +35,14 @@ if(VCPKG_LIBRARY_LINKAGE STREQUAL "static")
 else()
     list(APPEND MAKE_OPTS "SHARED=1")
 endif()
-
-vcpkg_configure_make(
-    SOURCE_PATH ${SOURCE_PATH}
-    PROJECT_SUBPATH .  # 如果项目的 Makefile 不在根目录，可以指定子路径
-    OPTIONS ${MAKE_OPTS}
-)
+#vcpkg_configure_make(
+#    SOURCE_PATH ${SOURCE_PATH}
+#    PROJECT_SUBPATH .  # 如果项目的 Makefile 不在根目录，可以指定子路径
+#    OPTIONS ${MAKE_OPTS}
+#)
 
 vcpkg_install_make()
-vcpkg_fixup_pkgconfig()
+#vcpkg_fixup_pkgconfig()
 
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/share")
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
