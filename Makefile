@@ -12,3 +12,5 @@ update:
 	git commit -m 'update version'
 	git push
 
+build:
+	@vcpkg install $(name) --overlay-ports=./ports

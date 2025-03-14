@@ -1,0 +1,20 @@
+{
+  "name": "apollo-client",
+  "version": "0.0.1",
+  "description": "Apollo c client",
+  "homepage": "https://github.com/lzeqian/apollo",
+  "documentation": "https://github.com/baidu/babylon",
+  "license": "Apache-2.0",
+  "supports": "linux & x64",
+  "dependencies": [
+    "curl",
+    {
+      "name": "vcpkg-cmake",
+      "host": true
+    },
+    {
+      "name": "vcpkg-cmake-config",
+      "host": true
+    }
+  ]
+}

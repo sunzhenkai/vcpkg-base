@@ -1,0 +1,4 @@
+apollo-client provides CMake targets:
+
+    find_package(xx CONFIG REQUIRED)
+    list(APPEND TARGET_LIBRARIES xx)
