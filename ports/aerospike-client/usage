@@ -1,4 +1,4 @@
-apollo-client provides CMake targets:
+aerospike-client provides CMake targets:
 
-    find_package(apollo-client CONFIG REQUIRED)
-    list(APPEND TARGET_LIBRARIES apollo-client::apollo-client)
+    find_package(aerospike-client CONFIG REQUIRED)
+    list(APPEND TARGET_LIBRARIES aerospike-client::aerospike-client)

@@ -8,6 +8,11 @@
   "supports": "linux & x64",
   "dependencies": [
     "openssl",
+    "zlib-ng",
+    {
+      "name": "vcpkg-make",
+      "host": true
+    },
     {
       "name": "vcpkg-cmake",
       "host": true
