@@ -13,4 +13,5 @@ update:
 	git push
 
 build:
+	@vcpkg remove $(name)
 	@vcpkg install $(name) --overlay-ports=./ports
