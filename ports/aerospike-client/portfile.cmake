@@ -13,29 +13,37 @@ if(NOT EXISTS "${SOURCE_PATH}/.git")
                 WORKING_DIRECTORY ${SOURCE_PATH}
                 LOGNAME clone
         )
+
+        message(STATUS "Checkout revision ${GIT_REF}")
+        vcpkg_execute_required_process(
+                COMMAND ${GIT} checkout ${GIT_REF}
+                WORKING_DIRECTORY ${SOURCE_PATH}
+                LOGNAME checkout
+        )
+
+        message(STATUS "Fetching submodules")
+        vcpkg_execute_required_process(
+                COMMAND ${GIT} submodule update --init
+                WORKING_DIRECTORY ${SOURCE_PATH}
+                LOGNAME submodule
+        )
+
+
+        # apply patch
+        vcpkg_apply_patches(
+                SOURCE_PATH ${SOURCE_PATH}
+                PATCHES makefile.patch
+        )
 endif()
 
-message(STATUS "Checkout revision ${GIT_REF}")
-vcpkg_execute_required_process(
-        COMMAND ${GIT} checkout ${GIT_REF}
-        WORKING_DIRECTORY ${SOURCE_PATH}
-        LOGNAME checkout
-)
-
-message(STATUS "Fetching submodules")
-vcpkg_execute_required_process(
-        COMMAND ${GIT} submodule update --init
-        WORKING_DIRECTORY ${SOURCE_PATH}
-        LOGNAME submodule
-)
-
-vcpkg_execute_required_process(
-        COMMAND bash -c "echo $PATH && echo $LD_LIBRARY_PATH"
-        WORKING_DIRECTORY ${SOURCE_PATH}
-        LOGNAME verbose)
-
+message(STATUS "PATH: $ENV{PATH}")
+message(STATUS "LIBRARY_PATH: $ENV{LIBRARY_PATH}")
+message(STATUS "LD_LIBRARY_PATH: $ENV{LD_LIBRARY_PATH}")
+message(STATUS "CPATH: $ENV{CPATH}")
+message(STATUS "AR: $ENV{AR}")
+message(STATUS "CMAKE_AR: $ENV{CMAKE_AR}")
 vcpkg_configure_make(SOURCE_PATH "${SOURCE_PATH}" COPY_SOURCE SKIP_CONFIGURE)
-vcpkg_build_make(OPTIONS STATIC=1 SHARED=0 DISABLE_PARALLEL)
+vcpkg_build_make(DISABLE_PARALLEL ENABLE_INSTALL)
 vcpkg_fixup_pkgconfig()
 
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/share")
