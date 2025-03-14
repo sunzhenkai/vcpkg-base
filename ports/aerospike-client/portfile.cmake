@@ -63,7 +63,7 @@ vcpkg_build_make()
 vcpkg_install_make()
 vcpkg_fixup_pkgconfig()
 
-set(ENV{INSTALL_PREFIX} "$ENV_INSTALL_PREFIX_")
+set(ENV{INSTALL_PREFIX} "${ENV_INSTALL_PREFIX_}")
 message(STATUS "recover ENV{INSTALL_PREFIX}: ${ENV_INSTALL_PREFIX_} - $ENV{INSTALL_PREFIX}")
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/share")
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
