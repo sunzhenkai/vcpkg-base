@@ -1,4 +1,4 @@
-aerospike-client provides CMake targets:
+aerospike-client provides static and shared libraries:
 
-    find_package(aerospike-client CONFIG REQUIRED)
-    list(APPEND TARGET_LIBRARIES aerospike-client::aerospike-client)
+    find_library(aerospike NAMES aerospike REQUIRED)
+    target_link_libraries(main PRIVATE ${aerospike})
