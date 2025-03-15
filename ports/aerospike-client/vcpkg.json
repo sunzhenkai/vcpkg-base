@@ -1,0 +1,25 @@
+{
+  "name": "aerospike-client",
+  "version": "7.0.3",
+  "description": "Aerospike c client",
+  "homepage": "https://github.com/aerospike/aerospike-client-c",
+  "documentation": "https://github.com/aerospike/aerospike-client-c",
+  "license": "Apache-2.0",
+  "supports": "linux & x64",
+  "dependencies": [
+    "openssl",
+    "zlib-ng",
+    {
+      "name": "vcpkg-make",
+      "host": true
+    },
+    {
+      "name": "vcpkg-cmake",
+      "host": true
+    },
+    {
+      "name": "vcpkg-cmake-config",
+      "host": true
+    }
+  ]
+}

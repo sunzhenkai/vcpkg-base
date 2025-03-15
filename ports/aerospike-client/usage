@@ -1,0 +1,4 @@
+aerospike-client provides static and shared libraries:
+
+    find_library(aerospike NAMES aerospike REQUIRED)
+    target_link_libraries(main PRIVATE ${aerospike})
