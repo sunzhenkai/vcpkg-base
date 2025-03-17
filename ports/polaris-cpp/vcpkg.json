@@ -5,7 +5,6 @@
   "homepage": "https://github.com/polarismesh/polaris-cpp",
   "documentation": "https://github.com/polarismesh/polaris-cpp",
   "license": "BSD-3-Clause",
-  "supports": "linux & x64",
   "dependencies": [
     {
       "name": "vcpkg-cmake",

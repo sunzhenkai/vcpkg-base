@@ -5,7 +5,6 @@
   "homepage": "https://github.com/lzeqian/apollo",
   "documentation": "https://github.com/baidu/babylon",
   "license": "Apache-2.0",
-  "supports": "linux & x64",
   "dependencies": [
     "curl",
     "json-c",
