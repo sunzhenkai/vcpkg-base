@@ -1,4 +1,4 @@
 apollo-client provides CMake targets:
 
     find_package(apollo-client CONFIG REQUIRED)
-    list(APPEND TARGET_LIBRARIES apollo-client::apollo-client)
+    target_link_libraries(main apollo-client::apollo-client)
