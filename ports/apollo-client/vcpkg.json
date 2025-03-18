@@ -7,8 +7,8 @@
   "license": "Apache-2.0",
   "dependencies": [
     "cpp-httplib",
-    "gtest",
     "fmt",
+    "gtest",
     "openssl",
     "rapidjson",
     "spdlog",
