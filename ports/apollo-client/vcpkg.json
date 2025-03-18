@@ -1,13 +1,17 @@
 {
   "name": "apollo-client",
-  "version": "0.0.3",
+  "version": "0.0.1",
   "description": "Apollo c client",
-  "homepage": "https://github.com/lzeqian/apollo",
+  "homepage": "https://github.com/sunzhenkai/apollo-client-cpp",
   "documentation": "https://github.com/baidu/babylon",
   "license": "Apache-2.0",
   "dependencies": [
-    "curl",
-    "json-c",
+    "cpp-httplib",
+    "gtest",
+    "fmt",
+    "openssl",
+    "rapidjson",
+    "spdlog",
     {
       "name": "vcpkg-cmake",
       "host": true
