@@ -9,8 +9,8 @@
     "abseil",
     "boost-preprocessor",
     "boost-spirit",
-    "protobuf",
     "gtest",
+    "protobuf",
     {
       "name": "vcpkg-cmake",
       "host": true
