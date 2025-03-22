@@ -6,7 +6,7 @@ vcpkg_from_git(
   URL
   https://github.com/sunzhenkai/apollo-client-cpp.git
   REF
-  c3fb897a9689a95da8eb5fc1bcaf821d354ea0ff
+  a0ad23b2e33d6ffb2e4c94f8e5db2e0b10e6e6c2
   HEAD_REF
   master)
 
