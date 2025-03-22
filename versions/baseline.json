@@ -5,7 +5,7 @@
       "port-version": 0
     },
     "apollo-client": {
-      "baseline": "0.0.4",
+      "baseline": "0.0.5",
       "port-version": 0
     },
     "babylon": {
