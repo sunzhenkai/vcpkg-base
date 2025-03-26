@@ -1,6 +1,6 @@
 {
   "name": "apollo-client",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Apollo c client",
   "homepage": "https://github.com/sunzhenkai/apollo-client-cpp",
   "documentation": "https://github.com/baidu/babylon",
