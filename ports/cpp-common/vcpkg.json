@@ -1,10 +1,11 @@
 {
   "name": "cpp-common",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "cpp common library",
   "homepage": "https://github.com/sunzhenkai/cpp-common",
   "license": "MIT",
   "dependencies": [
+    "spdlog",
     {
       "name": "vcpkg-cmake",
       "host": true
