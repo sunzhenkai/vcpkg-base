@@ -7,7 +7,7 @@ macro(FIND_BIN_PROTOC)
     endif()
   endif()
   get_property(
-    PB_EXECUTABLE
+    PB_EXE
     TARGET protobuf::protoc
     PROPERTY LOCATION)
 endmacro(FIND_BIN_PROTOC)
@@ -34,10 +34,8 @@ function(generate_protobuf_message)
     string(LENGTH ${I} I_PATH_LENGTH)
     string(SUBSTRING ${I} 0 ${PROTO_PREFIX_LENGTH} I_PREFIX)
     if(NOT I_PREFIX STREQUAL ARG_IMPORT)
-      message(
-        FATAL_ERROR
-          "[GenerateProtoBufMessage] proto file not with import path. "
-          "[proto=${I_PREFIX}, import_path=${ARG_IMPORT}]")
+      message(FATAL_ERROR "proto file is not under import path. "
+                          "[proto=${I_PREFIX}, import_path=${ARG_IMPORT}]")
     endif()
     # get relative path of proto file
     string(SUBSTRING ${I} ${PROTO_PREFIX_LENGTH} ${I_PATH_LENGTH} REV_PATH)
@@ -52,14 +50,10 @@ function(generate_protobuf_message)
     removeextension(${REV_PATH} REV_PATH)
     # generate code by execute protoc
     execute_process(
-      COMMAND bash -c
-              "${PB_EXECUTABLE} ${IMPORT_ARGS} --cpp_out ${ARG_OUTPUT} ${I}"
+      COMMAND bash -c "${PB_EXE} ${IMPORT_ARGS} --cpp_out ${ARG_OUTPUT} ${I}"
       RESULT_VARIABLE rc)
     if(NOT "${rc}" STREQUAL "0")
-      message(
-        FATAL_ERROR
-          "[GenerateProtoBufMessage] generate ${I} cpp code failed. [message=${rc}]"
-      )
+      message(FATAL_ERROR "generate ${I} cpp code failed. [message=${rc}]")
     else()
       list(APPEND ${ARG_SRCS} "${ARG_OUTPUT}/${REV_PATH}.pb.cc")
       # LIST(APPEND ${ARG_HEADERS} "${ARG_OUTPUT}/${REV_PATH}.pb.h")
@@ -93,10 +87,8 @@ function(generate_protobuf_message_go)
     string(LENGTH ${I} I_PATH_LENGTH)
     string(SUBSTRING ${I} 0 ${PROTO_PREFIX_LENGTH} I_PREFIX)
     if(NOT I_PREFIX STREQUAL ARG_IMPORT)
-      message(
-        FATAL_ERROR
-          "[GenerateProtoBufMessage] proto file not with import path. "
-          "[proto=${I_PREFIX}, import_path=${ARG_IMPORT}]")
+      message(FATAL_ERROR "proto file is not under import path. "
+                          "[proto=${I_PREFIX}, import_path=${ARG_IMPORT}]")
     endif()
     # get relative path of proto file
     string(SUBSTRING ${I} ${PROTO_PREFIX_LENGTH} ${I_PATH_LENGTH} REV_PATH)
@@ -111,11 +103,10 @@ function(generate_protobuf_message_go)
     removeextension(${REV_PATH} REV_PATH)
     # generate code by execute protoc
     execute_process(
-      COMMAND bash -c
-              "${PB_EXECUTABLE} ${IMPORT_ARGS} --go_out ${ARG_OUTPUT} ${I}"
+      COMMAND bash -c "${PB_EXE} ${IMPORT_ARGS} --go_out ${ARG_OUTPUT} ${I}"
       RESULT_VARIABLE rc)
     if(NOT "${rc}" STREQUAL "0")
       message(FATAL_ERROR "generate ${I} go code failed. [message=${rc}]")
     endif()
   endforeach()
-endfunction(generate_protobuf_message)
+endfunction(generate_protobuf_message_go)
