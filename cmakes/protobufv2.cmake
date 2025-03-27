@@ -74,17 +74,52 @@ function(generate_protobuf_message)
       PARENT_SCOPE)
 endfunction(generate_protobuf_message)
 
+macro(prepare_gen_go)
+  find_program(GO_EXE go)
+  if(GO_EXE)
+    message(STATUS "Found Go compiler: ${GO_EXE}")
+    execute_process(
+      COMMAND ${GO_EXE} install
+              google.golang.org/protobuf/cmd/protoc-gen-go@latest
+      OUTPUT_VARIABLE GO_PLUGIN_PATH
+      ERROR_QUIET
+      RESULT_VARIABLE EXIT_CODE)
+    if(NOT EXIT_CODE EQUAL 0)
+      message(FATAL_ERROR "go install protoc-gen-go-grpc failed")
+    endif()
+
+    if(ARG_GEN_GRPC)
+      execute_process(
+        COMMAND ${GO_EXE} install
+                google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+        OUTPUT_VARIABLE GO_PLUGIN_PATH
+        ERROR_QUIET
+        RESULT_VARIABLE EXIT_CODE)
+      if(NOT EXIT_CODE EQUAL 0)
+        message(FATAL_ERROR "go install protoc-gen-go-grpc failed")
+      endif()
+    endif()
+  else()
+    message(FATAL_ERROR "cannot find go executable binary")
+  endif()
+endmacro(prepare_gen_go)
+
 function(generate_protobuf_message_go)
-  cmake_parse_arguments(ARG "" "OUTPUT;IMPORT;GO_OPT_MODULE"
+  cmake_parse_arguments(ARG "GEN_GRPC" "OUTPUT;IMPORT;GO_OPT_MODULE"
                         "FILES;EXTERN_IMPORT" ${ARGN})
   find_bin_protoc()
   process_import()
+  prepare_gen_go()
 
   # go opt
   if(NOT ${ARG_GO_OPT_MODULE} STREQUAL "")
     set(arg_go_opt "--go_opt=module=${ARG_GO_OPT_MODULE}")
   endif()
-  message(STATUS "CKPT ${arg_go_opt}")
+  # grpc opt
+  if(ARG_GEN_GRPC)
+    set(arg_grpc_opt
+        "--go-grpc_out=${ARG_OUTPUT} --go-grpc_opt=module=${ARG_GO_OPT_MODULE}")
+  endif()
 
   file(MAKE_DIRECTORY ${ARG_OUTPUT})
   file(GLOB PROTO_FILES ${ARG_FILES})
@@ -112,7 +147,7 @@ function(generate_protobuf_message_go)
     execute_process(
       COMMAND
         bash -c
-        "${PB_EXE} ${IMPORT_ARGS} --go_out ${ARG_OUTPUT} ${arg_go_opt} ${I}"
+        "${PB_EXE} ${IMPORT_ARGS} --go_out ${ARG_OUTPUT} ${arg_go_opt} ${arg_grpc_opt} ${I}"
       RESULT_VARIABLE rc)
     if(NOT "${rc}" STREQUAL "0")
       message(FATAL_ERROR "generate ${I} go code failed. [message=${rc}]")
