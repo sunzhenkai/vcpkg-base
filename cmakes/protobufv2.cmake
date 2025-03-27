@@ -75,9 +75,16 @@ function(generate_protobuf_message)
 endfunction(generate_protobuf_message)
 
 function(generate_protobuf_message_go)
-  cmake_parse_arguments(ARG "" "OUTPUT;IMPORT" "FILES;EXTERN_IMPORT" ${ARGN})
+  cmake_parse_arguments(ARG "" "OUTPUT;IMPORT;GO_OPT_MODULE"
+                        "FILES;EXTERN_IMPORT" ${ARGN})
   find_bin_protoc()
   process_import()
+
+  # go opt
+  if(NOT ${ARG_GO_OPT_MODULE} STREQUAL "")
+    set(arg_go_opt "--go_opt=module=${ARG_GO_OPT_MODULE}")
+  endif()
+  message(STATUS "CKPT ${arg_go_opt}")
 
   file(MAKE_DIRECTORY ${ARG_OUTPUT})
   file(GLOB PROTO_FILES ${ARG_FILES})
@@ -103,7 +110,9 @@ function(generate_protobuf_message_go)
     removeextension(${REV_PATH} REV_PATH)
     # generate code by execute protoc
     execute_process(
-      COMMAND bash -c "${PB_EXE} ${IMPORT_ARGS} --go_out ${ARG_OUTPUT} ${I}"
+      COMMAND
+        bash -c
+        "${PB_EXE} ${IMPORT_ARGS} --go_out ${ARG_OUTPUT} ${arg_go_opt} ${I}"
       RESULT_VARIABLE rc)
     if(NOT "${rc}" STREQUAL "0")
       message(FATAL_ERROR "generate ${I} go code failed. [message=${rc}]")
