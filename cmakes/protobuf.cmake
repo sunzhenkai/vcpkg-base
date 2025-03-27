@@ -7,7 +7,6 @@ macro(FIND_BIN_PROTOC)
     endif()
   endif()
   file(MAKE_DIRECTORY ${ARG_OUTPUT})
-  file(GLOB PROTO_FILES ${ARG_FILES})
   get_property(
     PB_EXECUTABLE
     TARGET protobuf::protoc
@@ -23,6 +22,7 @@ function(GenerateProtoBufMessage)
   foreach(I IN LISTS ARG_EXTERN_IMPORT)
     set(IMPORT_ARGS "-I${I} ${IMPORT_ARGS}")
   endforeach()
+  file(GLOB PROTO_FILES ${ARG_FILES})
   foreach(I ${PROTO_FILES})
     string(LENGTH ${I} I_PATH_LENGTH)
     string(SUBSTRING ${I} 0 ${PROTO_PREFIX_LENGTH} I_PREFIX)
@@ -74,6 +74,7 @@ function(generate_protobuf_message_go)
   find_bin_protoc()
   message(status "generate protobuf go code. [files=${arg_files}]")
 
+  file(GLOB PROTO_FILES ${ARG_FILES})
   string(length ${arg_import} proto_prefix_length)
   set(import_args "-i${arg_import}")
   foreach(i in lists arg_extern_import)
