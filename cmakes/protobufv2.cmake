@@ -76,22 +76,38 @@ endfunction(generate_protobuf_message)
 
 macro(prepare_gen_go)
   find_program(GO_EXE go)
+  if("${ARG_GO_GEN_VERSION}" STREQUAL "")
+    set(GO_GEN_VERSION_ "latest")
+  else()
+    set(GO_GEN_VERSION_ "${ARG_GO_GEN_VERSION}")
+  endif()
+  if("${ARG_GO_GEN_GRPC_VERSION}" STREQUAL "")
+    set(GO_GEN_GRPC_VERSION_ "latest")
+  else()
+    set(GO_GEN_GRPC_VERSION_ "${ARG_GO_GEN_GRPC_VERSION}")
+  endif()
+  message(
+    STATUS
+      "Versions: GO_GEN_VERSION=${GO_GEN_VERSION_}, GO_GEN_GRPC_VERSION=${GO_GEN_GRPC_VERSION_}"
+  )
+
   if(GO_EXE)
     message(STATUS "Found Go compiler: ${GO_EXE}")
     execute_process(
       COMMAND ${GO_EXE} install
-              google.golang.org/protobuf/cmd/protoc-gen-go@latest
+              "google.golang.org/protobuf/cmd/protoc-gen-go@${GO_GEN_VERSION_}"
       OUTPUT_VARIABLE GO_PLUGIN_PATH
       ERROR_QUIET
       RESULT_VARIABLE EXIT_CODE)
     if(NOT EXIT_CODE EQUAL 0)
-      message(FATAL_ERROR "go install protoc-gen-go-grpc failed")
+      message(FATAL_ERROR "go install protoc-gen-go failed")
     endif()
 
     if(ARG_GEN_GRPC)
       execute_process(
-        COMMAND ${GO_EXE} install
-                google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+        COMMAND
+          ${GO_EXE} install
+          "google.golang.org/grpc/cmd/protoc-gen-go-grpc@${GO_GEN_GRPC_VERSION_}"
         OUTPUT_VARIABLE GO_PLUGIN_PATH
         ERROR_QUIET
         RESULT_VARIABLE EXIT_CODE)
@@ -105,8 +121,10 @@ macro(prepare_gen_go)
 endmacro(prepare_gen_go)
 
 function(generate_protobuf_message_go)
-  cmake_parse_arguments(ARG "GEN_GRPC" "OUTPUT;IMPORT;GO_OPT_MODULE"
-                        "FILES;EXTERN_IMPORT" ${ARGN})
+  cmake_parse_arguments(
+    ARG "GEN_GRPC"
+    "OUTPUT;IMPORT;GO_OPT_MODULE;GO_GEN_VERSION;GO_GEN_GRPC_VERSION"
+    "FILES;EXTERN_IMPORT" ${ARGN})
   find_bin_protoc()
   process_import()
   prepare_gen_go()
