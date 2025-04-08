@@ -93,6 +93,7 @@ macro(prepare_gen_go)
 
   if(GO_EXE)
     message(STATUS "Found Go compiler: ${GO_EXE}")
+    # releases page: https://github.com/protocolbuffers/protobuf-go/releases
     execute_process(
       COMMAND ${GO_EXE} install
               "google.golang.org/protobuf/cmd/protoc-gen-go@${GO_GEN_VERSION_}"
