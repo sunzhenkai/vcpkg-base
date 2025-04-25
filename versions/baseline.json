@@ -13,7 +13,7 @@
       "port-version": 0
     },
     "cpp-common": {
-      "baseline": "0.0.11",
+      "baseline": "0.0.12",
       "port-version": 0
     },
     "datastax-cpp-driver": {
