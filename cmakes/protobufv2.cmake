@@ -86,9 +86,14 @@ macro(prepare_gen_go)
   else()
     set(GO_GEN_GRPC_VERSION_ "${ARG_GO_GEN_GRPC_VERSION}")
   endif()
+  # go version
+  execute_process(
+    COMMAND go version
+    OUTPUT_VARIABLE GO_VERSION_OUTPUT
+    OUTPUT_STRIP_TRAILING_WHITESPACE)
   message(
     STATUS
-      "Versions: GO_GEN_VERSION=${GO_GEN_VERSION_}, GO_GEN_GRPC_VERSION=${GO_GEN_GRPC_VERSION_}"
+      "Versions: GO_VERSION=${GO_VERSION_OUTPUT}, GO_GEN_VERSION=${GO_GEN_VERSION_}, GO_GEN_GRPC_VERSION=${GO_GEN_GRPC_VERSION_}"
   )
 
   if(GO_EXE)
@@ -119,7 +124,7 @@ macro(prepare_gen_go)
   else()
     message(FATAL_ERROR "cannot find go executable binary")
   endif()
-endmacro(prepare_gen_go)
+endmacro()
 
 function(generate_protobuf_message_go)
   cmake_parse_arguments(
