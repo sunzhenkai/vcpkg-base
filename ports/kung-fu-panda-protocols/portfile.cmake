@@ -1,7 +1,7 @@
 vcpkg_check_linkage(ONLY_STATIC_LIBRARY)
 
 # set(GIT_REF v${VERSION})
-set(GIT_REF v0.0.16)
+set(GIT_REF v0.0.17)
 set(GIT_URL https://github.com/sunzhenkai/kung-fu-panda-protocols.git)
 
 message(STATUS "protocols [version=${GIT_REF}]")
