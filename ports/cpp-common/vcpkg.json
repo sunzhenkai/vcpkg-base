@@ -5,8 +5,8 @@
   "homepage": "https://github.com/sunzhenkai/cpp-common",
   "license": "MIT",
   "dependencies": [
-    "spdlog",
     "rapidjson",
+    "spdlog",
     {
       "name": "vcpkg-cmake",
       "host": true
