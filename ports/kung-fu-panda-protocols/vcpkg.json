@@ -1,0 +1,17 @@
+{
+  "name": "kung-fu-panda-protocols",
+  "version": "0.0.1",
+  "description": "kung fu panda protocols",
+  "homepage": "https://github.com/sunzhenkai/kung-fu-panda-protocols",
+  "dependencies": [
+    "protobuf",
+    {
+      "name": "vcpkg-cmake",
+      "host": true
+    },
+    {
+      "name": "vcpkg-cmake-config",
+      "host": true
+    }
+  ]
+}

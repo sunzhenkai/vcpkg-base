@@ -1,0 +1,4 @@
+kung-fu-panda-protocols provides CMake targets:
+
+find_package(kung-fu-panda-protocols CONFIG REQUIRED)
+target_link_libraries(main PRIVATE kung-fu-panda-protocols::kung-fu-panda-protocols)
