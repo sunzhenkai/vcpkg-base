@@ -6,8 +6,8 @@
   "license": "MIT",
   "dependencies": [
     "brpc",
-    "spdlog",
     "rapidjson",
+    "spdlog",
     {
       "name": "vcpkg-cmake",
       "host": true
