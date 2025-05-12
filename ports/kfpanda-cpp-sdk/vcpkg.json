@@ -6,9 +6,9 @@
   "license": "MIT",
   "dependencies": [
     "brpc",
+    "kung-fu-panda-protocols",
     "rapidjson",
     "spdlog",
-    "kung-fu-panda-protocols",
     {
       "name": "vcpkg-cmake",
       "host": true
