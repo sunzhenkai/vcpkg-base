@@ -5,6 +5,7 @@
   "homepage": "https://github.com/sunzhenkai/kfpanda-cpp-sdk",
   "license": "MIT",
   "dependencies": [
+    "brpc",
     "spdlog",
     "rapidjson",
     {
