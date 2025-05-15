@@ -3,7 +3,7 @@ vcpkg_check_linkage(ONLY_STATIC_LIBRARY)
 vcpkg_from_git(
   OUT_SOURCE_PATH SOURCE_PATH URL
   https://github.com/sunzhenkai/kfpanda-cpp-sdk.git REF
-  73460e65567c0316830d0c5fde6ef753512dfa53)
+  ac5ae2a258417fda4e3dbe4dbedeaedda5218e35)
 
 vcpkg_cmake_configure(SOURCE_PATH "${SOURCE_PATH}")
 vcpkg_cmake_install()
