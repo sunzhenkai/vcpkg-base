@@ -13,7 +13,7 @@
       "port-version": 0
     },
     "cpp-common": {
-      "baseline": "0.0.14",
+      "baseline": "0.0.15",
       "port-version": 0
     },
     "datastax-cpp-driver": {
@@ -26,6 +26,14 @@
     },
     "grpc": {
       "baseline": "1.22.0",
+      "port-version": 0
+    },
+    "kfpanda-cpp-sdk": {
+      "baseline": "0.0.3",
+      "port-version": 0
+    },
+    "kung-fu-panda-protocols": {
+      "baseline": "0.0.17",
       "port-version": 0
     },
     "leveldb": {
