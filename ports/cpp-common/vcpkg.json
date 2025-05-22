@@ -5,6 +5,7 @@
   "homepage": "https://github.com/sunzhenkai/cpp-common",
   "license": "MIT",
   "dependencies": [
+    "abseil",
     "rapidjson",
     "spdlog",
     {
