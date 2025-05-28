@@ -2,7 +2,7 @@ vcpkg_check_linkage(ONLY_STATIC_LIBRARY)
 
 vcpkg_from_git(
   OUT_SOURCE_PATH SOURCE_PATH URL https://github.com/sunzhenkai/cpp-common.git
-  REF 471cb1134da99368cdc3ee50e9019b2766c5786e)
+  REF a37d29d64fcbbfc425e9ebd4d89ae888a2fe5433)
 
 vcpkg_cmake_configure(SOURCE_PATH "${SOURCE_PATH}")
 vcpkg_cmake_install()
