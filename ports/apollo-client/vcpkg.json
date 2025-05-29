@@ -1,11 +1,12 @@
 {
   "name": "apollo-client",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Apollo c client",
   "homepage": "https://github.com/sunzhenkai/apollo-client-cpp",
   "documentation": "https://github.com/baidu/babylon",
   "license": "Apache-2.0",
   "dependencies": [
+    "abseil",
     "cpp-httplib",
     "fmt",
     "gtest",
