@@ -18,7 +18,6 @@
       "host": true
     }
   ],
-  "default-features": [],
   "features": {
     "objectstorage": {
       "description": "Object Storage",
@@ -26,7 +25,11 @@
         "aliyun-oss-cpp-sdk",
         {
           "name": "arrow",
-          "features": ["filesystem", "parquet", "s3"]
+          "features": [
+            "filesystem",
+            "parquet",
+            "s3"
+          ]
         }
       ]
     }
