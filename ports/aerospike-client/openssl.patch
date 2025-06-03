@@ -1,20 +1,21 @@
 diff --git a/src/main/aerospike/as_tls.c b/src/main/aerospike/as_tls.c
-index e2d2ec22..b2c621ae 100644
+index f6d35294..0cbece2f 100644
 --- a/src/main/aerospike/as_tls.c
 +++ b/src/main/aerospike/as_tls.c
-@@ -286,9 +286,12 @@ as_tls_cleanup(void)
+@@ -286,7 +286,15 @@ as_tls_cleanup(void)
+ 
  	// https://wiki.openssl.org/index.php/Library_Initialization#Cleanup
  	//
- #if OPENSSL_VERSION_NUMBER < 0x10100000L
 -	FIPS_mode_set(0);
--#elif OPENSSL_VERSION_NUMBER == 0x10100000L
--	FIPS_module_mode_set(0);
++#if OPENSSL_VERSION_NUMBER < 0x10100000L
 +    FIPS_mode_set(0);
 +#elif OPENSSL_VERSION_NUMBER < 0x30000000L
 +    FIPS_module_mode_set(0);
 +#else
 +    OSSL_PROVIDER_unload(OSSL_PROVIDER_load(NULL, "fips"));  // 可选：卸载 fips provider
 +    OSSL_PROVIDER_load(NULL, "default"); // 加载默认 provider
- #endif
++#endif
++
  	ENGINE_cleanup();
  	CONF_modules_unload(1);
+ 	EVP_cleanup();
