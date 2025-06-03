@@ -7,10 +7,12 @@ vcpkg_from_git(
 vcpkg_check_features(OUT_FEATURE_OPTIONS FEATURE_OPTIONS FEATURES objectstorage
                      WITH_OBJECT_STORAGE)
 
-vcpkg_cmake_configure(SOURCE_PATH "${SOURCE_PATH}")
+vcpkg_cmake_configure(SOURCE_PATH "${SOURCE_PATH}" OPTIONS ${FEATURE_OPTIONS})
 vcpkg_cmake_install()
 vcpkg_cmake_config_fixup(PACKAGE_NAME "cppcommon")
-vcpkg_cmake_config_fixup(PACKAGE_NAME "objectstorage")
+if(WITH_OBJECT_STORAGE)
+  vcpkg_cmake_config_fixup(PACKAGE_NAME "objectstorage")
+endif()
 
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
 
