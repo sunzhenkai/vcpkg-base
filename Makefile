@@ -7,7 +7,7 @@ update-version:
 update:
 	@git add .
 	@git commit -m 'update' || echo 'no change'
-	@vcpkg --x-builtin-ports-root=./ports --x-builtin-registry-versions-dir=./versions x-add-version --all --verbose --overwrite-version
+	@vcpkg --x-builtin-ports-root=./ports --x-builtin-registry-versions-dir=./versions x-add-version --all --verbose --overwrite-version || exit 1
 	@git add .
 	@git commit -m 'update version' || echo 'no version change'
 	@git push

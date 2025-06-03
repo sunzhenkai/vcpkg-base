@@ -1,27 +1,14 @@
 {
   "name": "cpp-common",
   "version": "0.0.18",
-  "homepage": "https://github.com/sunzhenkai/cpp-common",
   "description": "cpp common library",
+  "homepage": "https://github.com/sunzhenkai/cpp-common",
   "license": "MIT",
-  "default-features": ["objectstorage"],
-  "features": {
-    "objectstorage": {
-      "description": "Object Storage",
-      "dependencies": [
-        {
-          "name": "arrow",
-          "features": ["filesystem", "parquet", "s3"]
-        },
-        "aliyun-oss-cpp-sdk"
-      ]
-    }
-  },
   "dependencies": [
     "abseil",
     "gtest",
-    "spdlog",
     "rapidjson",
+    "spdlog",
     {
       "name": "vcpkg-cmake",
       "host": true
@@ -30,5 +17,24 @@
       "name": "vcpkg-cmake-config",
       "host": true
     }
-  ]
+  ],
+  "default-features": [
+    "objectstorage"
+  ],
+  "features": {
+    "objectstorage": {
+      "description": "Object Storage",
+      "dependencies": [
+        "aliyun-oss-cpp-sdk",
+        {
+          "name": "arrow",
+          "features": [
+            "filesystem",
+            "parquet",
+            "s3"
+          ]
+        }
+      ]
+    }
+  }
 }
