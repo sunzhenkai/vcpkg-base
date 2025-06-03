@@ -1,6 +1,7 @@
 {
   "name": "aerospike-client",
-  "version": "7.0.3",
+  "version": "4.6.23",
+  "port-version": 1,
   "description": "Aerospike c client",
   "homepage": "https://github.com/aerospike/aerospike-client-c",
   "documentation": "https://github.com/aerospike/aerospike-client-c",
