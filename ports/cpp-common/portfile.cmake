@@ -2,7 +2,7 @@ vcpkg_check_linkage(ONLY_STATIC_LIBRARY)
 
 vcpkg_from_git(
   OUT_SOURCE_PATH SOURCE_PATH URL https://github.com/sunzhenkai/cpp-common.git
-  REF 17f7f6a6d86535eea81c38e8b8f57e4702e72017)
+  REF 62fcd2af0a472f3e629765edbd0ea09b6f2fba5e)
 
 vcpkg_check_features(OUT_FEATURE_OPTIONS FEATURE_OPTIONS FEATURES objectstorage
                      WITH_OBJECT_STORAGE)
@@ -10,6 +10,7 @@ vcpkg_check_features(OUT_FEATURE_OPTIONS FEATURE_OPTIONS FEATURES objectstorage
 vcpkg_cmake_configure(SOURCE_PATH "${SOURCE_PATH}")
 vcpkg_cmake_install()
 vcpkg_cmake_config_fixup(PACKAGE_NAME "cppcommon")
+vcpkg_cmake_config_fixup(PACKAGE_NAME "objectstorage")
 
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
 
