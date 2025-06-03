@@ -2,3 +2,6 @@ cpp-common provides CMake targets:
 
 find_package(cpp-common CONFIG REQUIRED)
 target_link_libraries(main PRIVATE cpp-common::cpp-common)
+
+find_package(object-storage CONFIG REQUIRED)
+target_link_libraries(main PRIVATE cpp-common::object-storage)
