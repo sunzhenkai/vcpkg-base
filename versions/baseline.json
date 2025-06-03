@@ -1,8 +1,8 @@
 {
   "default": {
     "aerospike-client": {
-      "baseline": "7.0.3",
-      "port-version": 0
+      "baseline": "4.6.23",
+      "port-version": 1
     },
     "apollo-client": {
       "baseline": "0.0.8",
