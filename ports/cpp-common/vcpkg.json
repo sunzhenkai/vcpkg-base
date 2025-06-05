@@ -1,6 +1,6 @@
 {
   "name": "cpp-common",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "cpp common library",
   "homepage": "https://github.com/sunzhenkai/cpp-common",
   "license": "MIT",
@@ -25,11 +25,7 @@
         "aliyun-oss-cpp-sdk",
         {
           "name": "arrow",
-          "features": [
-            "filesystem",
-            "parquet",
-            "s3"
-          ]
+          "features": ["filesystem", "parquet", "s3"]
         }
       ]
     }
