@@ -30,6 +30,13 @@
             "parquet",
             "s3"
           ]
+        },
+        {
+          "name": "google-cloud-cpp",
+          "default-features": false,
+          "features": [
+            "storage"
+          ]
         }
       ]
     }
