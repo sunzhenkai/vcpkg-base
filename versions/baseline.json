@@ -33,7 +33,7 @@
       "port-version": 0
     },
     "kung-fu-panda-protocols": {
-      "baseline": "0.0.17",
+      "baseline": "0.0.19",
       "port-version": 0
     },
     "leveldb": {
