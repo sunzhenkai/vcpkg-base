@@ -2,7 +2,7 @@ vcpkg_check_linkage(ONLY_STATIC_LIBRARY)
 
 vcpkg_from_git(
   OUT_SOURCE_PATH SOURCE_PATH URL https://github.com/sunzhenkai/cpp-common.git
-  REF d55674689b989f5e5bda23b4ec98290e3ece8376)
+  REF b62526197120664f285acb3e2f4a50a8ebac46e2)
 
 vcpkg_check_features(OUT_FEATURE_OPTIONS FEATURE_OPTIONS FEATURES objectstorage
                      WITH_OBJECT_STORAGE)
