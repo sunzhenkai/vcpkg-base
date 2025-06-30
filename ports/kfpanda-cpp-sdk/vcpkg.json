@@ -1,6 +1,6 @@
 {
   "name": "kfpanda-cpp-sdk",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Kung Fu Panda C++ SDK",
   "homepage": "https://github.com/sunzhenkai/kfpanda-cpp-sdk",
   "license": "MIT",
