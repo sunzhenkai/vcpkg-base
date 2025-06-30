@@ -29,7 +29,7 @@
       "port-version": 0
     },
     "kfpanda-cpp-sdk": {
-      "baseline": "0.0.4",
+      "baseline": "0.0.5",
       "port-version": 0
     },
     "kung-fu-panda-protocols": {
