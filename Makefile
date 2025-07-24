@@ -3,9 +3,9 @@ install:
 resolve:
 	@bash scripts/install_dependencies.sh
 update-version:
-	@find ./ports -name "vcpkg.json" -type f -exec vcpkg format-manifest {} \;
 	@vcpkg --x-builtin-ports-root=./ports --x-builtin-registry-versions-dir=./versions x-add-version --all --verbose --overwrite-version
 update:
+	@find ./ports -name "vcpkg.json" -type f -exec vcpkg format-manifest {} \;
 	@git add .
 	@git commit -m 'update' || echo 'no change'
 	@vcpkg --x-builtin-ports-root=./ports --x-builtin-registry-versions-dir=./versions x-add-version --all --verbose --overwrite-version || exit 1
