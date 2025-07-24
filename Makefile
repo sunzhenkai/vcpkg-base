@@ -3,6 +3,7 @@ install:
 resolve:
 	@bash scripts/install_dependencies.sh
 update-version:
+	@find /home/wii/code/public/vcpkg-base/ports -name "vcpkg.json" -type f -exec vcpkg format-manifest {} \;
 	@vcpkg --x-builtin-ports-root=./ports --x-builtin-registry-versions-dir=./versions x-add-version --all --verbose --overwrite-version
 update:
 	@git add .
