@@ -6,6 +6,7 @@
   "license": "MIT",
   "dependencies": [
     "abseil",
+    "concurrentqueue",
     "cpp-httplib",
     "gtest",
     "rapidjson",
