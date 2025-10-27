@@ -1,0 +1,22 @@
+{
+  "name": "hiredis-cluster",
+  "version": "0.14.0",
+  "description": "hiredis cluster library",
+  "homepage": "https://github.com/Nordix/hiredis-cluster",
+  "license": "MIT",
+  "dependencies": [
+    "openssl",
+    {
+      "name": "hiredis",
+      "features": ["ssl"]
+    },
+    {
+      "name": "vcpkg-cmake",
+      "host": true
+    },
+    {
+      "name": "vcpkg-cmake-config",
+      "host": true
+    }
+  ]
+}

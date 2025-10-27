@@ -15,5 +15,5 @@ update:
 
 build:
 	@vcpkg remove $(name) || echo "not installed"
-	@vcpkg install $(name) --overlay-ports=./ports
+	@vcpkg install $(name) --overlay-ports=./ports --recurse
 	@#vcpkg install $(name) --debug --overlay-ports=./ports
