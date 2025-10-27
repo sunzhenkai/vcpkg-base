@@ -28,6 +28,10 @@
       "baseline": "1.22.0",
       "port-version": 0
     },
+    "hiredis-cluster": {
+      "baseline": "0.14.0",
+      "port-version": 0
+    },
     "kfpanda-cpp-sdk": {
       "baseline": "0.0.5",
       "port-version": 0
