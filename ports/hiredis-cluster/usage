@@ -1,0 +1,5 @@
+hiredis-cluster provides CMake targets:
+
+find_package(hiredis_cluster CONFIG REQUIRED)
+target_link_libraries(main PRIVATE hiredis_cluster::hiredis_cluster)
+
