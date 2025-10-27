@@ -5,11 +5,13 @@
   "homepage": "https://github.com/Nordix/hiredis-cluster",
   "license": "MIT",
   "dependencies": [
-    "openssl",
     {
       "name": "hiredis",
-      "features": ["ssl"]
+      "features": [
+        "ssl"
+      ]
     },
+    "openssl",
     {
       "name": "vcpkg-cmake",
       "host": true
