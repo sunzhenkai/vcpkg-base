@@ -8,7 +8,9 @@
   "dependencies": [
     {
       "name": "hiredis",
-      "features": ["ssl"]
+      "features": [
+        "ssl"
+      ]
     },
     "openssl",
     {
