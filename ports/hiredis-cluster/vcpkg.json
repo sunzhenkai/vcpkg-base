@@ -1,15 +1,14 @@
 {
   "name": "hiredis-cluster",
   "version": "0.14.0",
+  "port-version": 1,
   "description": "hiredis cluster library",
   "homepage": "https://github.com/Nordix/hiredis-cluster",
   "license": "MIT",
   "dependencies": [
     {
       "name": "hiredis",
-      "features": [
-        "ssl"
-      ]
+      "features": ["ssl"]
     },
     "openssl",
     {

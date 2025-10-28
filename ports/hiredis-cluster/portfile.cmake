@@ -1,8 +1,14 @@
 vcpkg_check_linkage(ONLY_STATIC_LIBRARY)
 
 vcpkg_from_git(
-  OUT_SOURCE_PATH SOURCE_PATH URL https://github.com/Nordix/hiredis-cluster.git
-  REF d92edb8ac58d1279f5015715947f7ade61daca72)
+  OUT_SOURCE_PATH
+  SOURCE_PATH
+  URL
+  https://github.com/Nordix/hiredis-cluster.git
+  REF
+  d92edb8ac58d1279f5015715947f7ade61daca72
+  PATCHES
+  static-library.patch)
 
 vcpkg_cmake_configure(SOURCE_PATH "${SOURCE_PATH}" OPTIONS -DENABLE_SSL=ON
                       -DDOWNLOAD_HIREDIS=OFF -DDISABLE_TESTS=ON)
